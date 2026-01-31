@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 
 const Navbar = ({ t, onSelectLang, currentLang }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isLogoHovered, setIsLogoHovered] = useState(false);
 
     useEffect(() => {
         if (isMenuOpen) {
@@ -15,7 +16,33 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
         };
     }, [isMenuOpen]);
 
-    const logoLetters = "GREENMIST".split("");
+    // Split into GREEN and MIST for different styling
+    const greenLetters = "GREEN".split("");
+    const mistLetters = "MIST".split("");
+
+    const letterVariants = {
+        rest: { y: 0, scale: 1, rotate: 0 },
+        hover: (i) => ({
+            y: [0, -8, 0],
+            scale: [1, 1.1, 1],
+            rotate: [0, -5, 5, 0],
+            transition: {
+                duration: 0.6,
+                delay: i * 0.05,
+                ease: "easeInOut",
+                repeat: Infinity,
+                repeatDelay: 2
+            }
+        })
+    };
+
+    const glowVariants = {
+        rest: { opacity: 0 },
+        hover: { 
+            opacity: [0, 0.8, 0],
+            transition: { duration: 1.5, repeat: Infinity }
+        }
+    };
 
     const NavLink = ({ href, children }) => (
         <motion.a
@@ -42,38 +69,95 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                 <div className="flex items-center justify-between">
                     {/* Logo - Left */}
                     <div className="flex items-center gap-4">
-                        {/* Logo Image */}
-                        <img
+                        {/* Logo Image with pulse effect */}
+                        <motion.img
                             src="/images/logo_round.png"
                             alt="Logo"
                             className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-emerald-100 shadow-sm"
+                            whileHover={{ 
+                                scale: 1.1, 
+                                boxShadow: "0 0 20px rgba(16, 185, 129, 0.5)",
+                                borderColor: "#10b981"
+                            }}
+                            transition={{ type: "spring", stiffness: 300 }}
                         />
 
-                        {/* BOLD MIXED GREEN TITLE */}
+                        {/* ENGAGING GREENMIST TITLE */}
                         <motion.div
-                            className="flex overflow-hidden"
+                            className="flex items-center cursor-pointer relative"
+                            onHoverStart={() => setIsLogoHovered(true)}
+                            onHoverEnd={() => setIsLogoHovered(false)}
                             initial="rest"
-                            whileHover="hover"
-                            animate="rest"
+                            animate={isLogoHovered ? "hover" : "rest"}
                         >
-                            {"GREENMIST".split("").map((letter, i) => (
-                                <motion.span
-                                    key={i}
-                                    variants={{
-                                        rest: { y: 0 },
-                                        hover: { y: -5 }
-                                    }}
-                                    transition={{
-                                        type: "spring",
-                                        stiffness: 300,
-                                        damping: 10,
-                                        delay: i * 0.04
-                                    }}
-                                    className="font-['Syne'] text-2xl md:text-4x font-extrabold tracking-tighter inline-block bg-gradient-to-r from-green-600 via-emerald-500 to-green-800 bg-clip-text text-transparent filter drop-shadow-[0_2px_2px_rgba(0,0,0,0.1)]"
-                                >
-                                    {letter}
-                                </motion.span>
-                            ))}
+                            {/* Background glow effect */}
+                            <motion.div
+                                className="absolute inset-0 bg-gradient-to-r from-green-400/30 via-emerald-300/30 to-teal-400/30 blur-xl rounded-full"
+                                variants={glowVariants}
+                            />
+                            
+                            {/* GREEN part */}
+                            <div className="flex">
+                                {greenLetters.map((letter, i) => (
+                                    <motion.span
+                                        key={`green-${i}`}
+                                        custom={i}
+                                        variants={letterVariants}
+                                        className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
+                                        style={{
+                                            background: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                            textShadow: isLogoHovered ? '0 0 30px rgba(16, 185, 129, 0.5)' : 'none',
+                                            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                                        }}
+                                    >
+                                        {letter}
+                                    </motion.span>
+                                ))}
+                            </div>
+                            
+                            {/* MIST part with different style */}
+                            <div className="flex">
+                                {mistLetters.map((letter, i) => (
+                                    <motion.span
+                                        key={`mist-${i}`}
+                                        custom={i + 5}
+                                        variants={letterVariants}
+                                        className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
+                                        style={{
+                                            background: 'linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%)',
+                                            WebkitBackgroundClip: 'text',
+                                            WebkitTextFillColor: 'transparent',
+                                            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                                        }}
+                                    >
+                                        {letter}
+                                    </motion.span>
+                                ))}
+                            </div>
+
+                            {/* Sparkle effect on hover */}
+                            {isLogoHovered && (
+                                <>
+                                    <motion.span
+                                        className="absolute -top-1 -right-1 text-yellow-400 text-xs"
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], rotate: 360 }}
+                                        transition={{ duration: 1, repeat: Infinity }}
+                                    >
+                                        ✦
+                                    </motion.span>
+                                    <motion.span
+                                        className="absolute -bottom-1 left-4 text-emerald-400 text-xs"
+                                        initial={{ opacity: 0, scale: 0 }}
+                                        animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
+                                        transition={{ duration: 1, delay: 0.3, repeat: Infinity }}
+                                    >
+                                        ✦
+                                    </motion.span>
+                                </>
+                            )}
                         </motion.div>
                     </div>
 
@@ -111,13 +195,18 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                         </div>
 
                         {/* Contact Button */}
-                        <a
+                        <motion.a
                             href="#contact"
-                            className="bg-primary-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-primary-700 hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                            className="bg-primary-600 text-white px-6 py-2.5 rounded-full font-bold transition-all duration-300"
                             style={{ fontFamily: "'Poppins', sans-serif" }}
+                            whileHover={{ 
+                                scale: 1.05, 
+                                boxShadow: "0 10px 30px rgba(16, 185, 129, 0.4)"
+                            }}
+                            whileTap={{ scale: 0.95 }}
                         >
                             {t('contactUs')}
-                        </a>
+                        </motion.a>
                     </div>
 
                     {/* Mobile Menu Button */}
@@ -137,7 +226,12 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className="md:hidden mt-4 pb-4 border-t border-gray-100 pt-4 space-y-4 animate-fadeIn">
+                    <motion.div 
+                        className="md:hidden mt-4 pb-4 border-t border-gray-100 pt-4 space-y-4"
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                    >
                         <a
                             href="#home"
                             className="block text-xl font-semibold text-gray-700 hover:text-primary-600 py-2"
@@ -194,7 +288,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                 தமிழ்
                             </button>
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </div>
         </nav>

@@ -203,19 +203,19 @@ const ContactSection = ({ lang }) => {
   ];
 
   return (
-    <section id="contact" className="py-24 bg-slate-50 relative">
+    <section id="contact" className="py-6 md:py-8 bg-slate-50 relative">
       {/* Green Mixed Effect: A soft glow in the background */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2/3 h-1/2 bg-green-200/20 blur-[120px] rounded-full" />
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(34,197,94,0.2)] p-10 border border-white">
-          
+
           <AnimatePresence>
             {notification && (
-              <Toast 
-                message={notification.message} 
-                type={notification.type} 
-                onClose={() => setNotification(null)} 
+              <Toast
+                message={notification.message}
+                type={notification.type}
+                onClose={() => setNotification(null)}
               />
             )}
           </AnimatePresence>

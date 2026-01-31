@@ -20,7 +20,7 @@ const HomeContent = ({ lang, t }) => {
     const badgeY = useTransform(whyChooseScroll, [0, 1], [20, -100]);
     const imgY = useTransform(whyChooseScroll, [0, 1], ["-5%", "5%"]);
 
-    const interactiveFeatures = [
+    const interactiveFeatures = React.useMemo(() => [
         {
             id: 'crop',
             label: t('cropChecking'),
@@ -67,14 +67,20 @@ const HomeContent = ({ lang, t }) => {
             image: '/images/land_survey.webp',
             desc: t('landSurveyDesc'),
             descTa: t('landSurveyDesc'),
-            benefits: lang === 'ta' ? [t('landBen1'), t('landBen2'), t('landBen3')] : [t('landBen1'), t('landBen2'), t('landBen3'), t('landBen4')]
+            benefits: [t('landBen1'), t('landBen2'), t('landBen3'), t('landBen4')]
         }
-    ];
+    ], [lang, t]);
 
     const selectedFeature = React.useMemo(() =>
         interactiveFeatures.find(f => f.id === selectedFeatureId),
-        [selectedFeatureId, interactiveFeatures] // interactiveFeatures changes when lang changes
+        [selectedFeatureId, interactiveFeatures]
     );
+
+    React.useEffect(() => {
+        if (selectedFeatureId) {
+            setSelectedFeatureId(prev => prev);
+        }
+    }, [lang]);
 
     const scrollToBenefits = () => {
         benefitsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -83,7 +89,7 @@ const HomeContent = ({ lang, t }) => {
     return (
         <>
             {/* Interactive Feature Exploration */}
-            <section id="about" ref={containerRef} className="py-12 md:py-20 px-4 bg-white relative">
+            <section id="about" ref={containerRef} className="py-10 sm:py-14 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-white relative">
                 <div className="container mx-auto max-w-[1400px]">
                     <motion.div
                         initial="hidden"
@@ -93,21 +99,21 @@ const HomeContent = ({ lang, t }) => {
                             hidden: { opacity: 0, y: 30 },
                             visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
                         }}
-                        className="mb-8 md:mb-16 text-center"
+                        className="mb-8 sm:mb-10 md:mb-14 lg:mb-16 text-center"
                     >
-                        <h2 className="text-base sm:text-lg md:text-2xl font-black text-primary-900 uppercase tracking-tight mb-3 break-words leading-tight">
+                        <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black text-primary-900 uppercase tracking-tight mb-3 sm:mb-4 break-words leading-tight px-2">
                             <TypewriterText text={t('precisionTitle')} wordSpacing="0.25em" />
                         </h2>
                         <motion.div
                             initial={{ width: 0 }}
-                            whileInView={{ width: "8rem" }}
+                            whileInView={{ width: "6rem" }}
                             viewport={{ once: true }}
                             transition={{ delay: 0.5, duration: 1 }}
-                            className="h-1.5 md:h-2 bg-primary-600 mx-auto"
+                            className="h-1 sm:h-1.5 md:h-2 bg-primary-600 mx-auto"
                         ></motion.div>
                     </motion.div>
 
-                    <div ref={containerRef} className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+                    <div ref={containerRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10">
                         {interactiveFeatures.map((f, i) => (
                             <motion.div
                                 key={f.id}
@@ -120,7 +126,7 @@ const HomeContent = ({ lang, t }) => {
                                     setTimeout(() => benefitsRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
                                 }}
                             >
-                                <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] md:rounded-[24px] shadow-lg transition-all duration-500 group-hover:-translate-y-1">
+                                <div className="relative aspect-[4/3] overflow-hidden rounded-xl sm:rounded-2xl md:rounded-[20px] lg:rounded-[24px] shadow-lg transition-all duration-500 group-hover:-translate-y-1">
                                     <img
                                         src={f.image}
                                         alt={f.label}
@@ -128,14 +134,14 @@ const HomeContent = ({ lang, t }) => {
                                         className="w-full h-full object-cover object-center transition-all duration-500"
                                     />
                                     <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 via-primary-900/20 to-transparent">
-                                        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                                            <h3 className="text-sm md:text-base font-black text-white uppercase tracking-tight drop-shadow-lg">
+                                        <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4 md:p-5 lg:p-6">
+                                            <h3 className="text-xs sm:text-sm md:text-base font-black text-white uppercase tracking-tight drop-shadow-lg">
                                                 {f.label}
                                             </h3>
                                         </div>
                                     </div>
-                                    <div className="absolute inset-0 bg-primary-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-6 md:p-8">
-                                        <span className="bg-white text-primary-900 px-6 py-2 md:px-8 md:py-3 rounded-full font-black uppercase tracking-widest text-xs">
+                                    <div className="absolute inset-0 bg-primary-900/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center p-4 sm:p-6 md:p-8">
+                                        <span className="bg-white text-primary-900 px-4 py-2 sm:px-6 sm:py-2 md:px-8 md:py-3 rounded-full font-black uppercase tracking-widest text-[10px] sm:text-xs">
                                             {t('exploreNow')}
                                         </span>
                                     </div>
@@ -145,24 +151,33 @@ const HomeContent = ({ lang, t }) => {
                     </div>
 
                     {/* Quick Explanation Modal/Section */}
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                         {selectedFeature && (
                             <motion.div
+                                key={`${selectedFeatureId}-${lang}`}
                                 ref={benefitsRef}
                                 initial={{ opacity: 0, height: 0 }}
                                 animate={{ opacity: 1, height: 'auto' }}
                                 exit={{ opacity: 0, height: 0 }}
-                                className="mt-8 md:mt-12 p-6 md:p-8 bg-primary-50 rounded-[24px] md:rounded-[32px] border border-primary-100 overflow-hidden shadow-xl scroll-mt-24"
+                                className="mt-6 sm:mt-8 md:mt-10 lg:mt-12 p-4 sm:p-6 md:p-8 bg-primary-50 rounded-xl sm:rounded-2xl md:rounded-[24px] lg:rounded-[32px] border border-primary-100 overflow-hidden shadow-xl scroll-mt-20 sm:scroll-mt-24"
                             >
-                                <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-                                    <img src={selectedFeature.image} loading="lazy" className="rounded-2xl md:rounded-3xl shadow-xl aspect-video object-cover" alt="Feature" />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 lg:gap-12 items-center">
+                                    <img
+                                        src={selectedFeature.image}
+                                        loading="lazy"
+                                        className="rounded-xl sm:rounded-2xl md:rounded-3xl shadow-xl aspect-video object-cover w-full"
+                                        alt="Feature"
+                                    />
                                     <div>
-                                        <h4 className="text-lg md:text-xl font-black text-primary-900 mb-3 md:mb-4 uppercase tracking-tight">{selectedFeature.label}</h4>
-                                        <p className="text-sm md:text-base text-primary-800 leading-relaxed font-medium mb-4">
+                                        <h4 className="text-base sm:text-lg md:text-xl font-black text-primary-900 mb-2 sm:mb-3 md:mb-4 uppercase tracking-tight">
+                                            {selectedFeature.label}
+                                        </h4>
+                                        <p className="text-sm sm:text-base text-primary-800 leading-relaxed font-medium mb-4">
                                             {lang === 'ta' ? selectedFeature.descTa : selectedFeature.desc}
                                         </p>
                                         {selectedFeature.benefits && (
                                             <motion.div
+                                                key={`benefits-${lang}`}
                                                 initial="hidden"
                                                 animate="visible"
                                                 variants={{
@@ -172,23 +187,21 @@ const HomeContent = ({ lang, t }) => {
                                                         }
                                                     }
                                                 }}
-                                                className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8"
+                                                className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3 md:gap-4 mb-6 sm:mb-8"
                                             >
                                                 {selectedFeature.benefits.map((ben, idx) => (
                                                     <motion.div
-                                                        key={idx}
+                                                        key={`${lang}-${selectedFeatureId}-${idx}`}
                                                         variants={{
                                                             hidden: { opacity: 0, x: -20 },
                                                             visible: { opacity: 1, x: 0 }
                                                         }}
-                                                        className="flex items-center gap-4 bg-white/50 backdrop-blur-sm p-4 rounded-2xl shadow-sm border border-primary-100 group/ben transition-all duration-300 hover:bg-primary-50 hover:border-primary-300 hover:translate-x-1 cursor-default"
+                                                        className="flex items-start gap-2 sm:gap-3 md:gap-4 bg-white/50 backdrop-blur-sm p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-sm border border-primary-100 group/ben transition-all duration-300 hover:bg-primary-50 hover:border-primary-300"
                                                     >
-                                                        <div className="h-2 w-2 rounded-full bg-primary-500 group-hover/ben:scale-150 transition-transform duration-300 flex-shrink-0" />
-                                                        <TypewriterText
-                                                            text={ben}
-                                                            delay={idx * 0.1}
-                                                            className="text-sm md:text-base text-primary-900 font-semibold"
-                                                        />
+                                                        <div className="h-2 w-2 rounded-full bg-primary-500 flex-shrink-0 mt-1.5" />
+                                                        <span className="text-xs sm:text-sm md:text-base text-primary-900 font-semibold leading-relaxed">
+                                                            {ben}
+                                                        </span>
                                                     </motion.div>
                                                 ))}
                                             </motion.div>
@@ -196,7 +209,7 @@ const HomeContent = ({ lang, t }) => {
                                         <button
                                             type="button"
                                             onClick={() => setSelectedFeatureId(null)}
-                                            className="mt-6 md:mt-8 text-primary-600 font-black uppercase tracking-widest hover:text-primary-900 transition-colors text-xs md:text-sm"
+                                            className="mt-4 sm:mt-6 md:mt-8 text-primary-600 font-black uppercase tracking-widest hover:text-primary-900 transition-colors text-xs sm:text-sm"
                                         >
                                             {t('closeDetails')}
                                         </button>
@@ -208,14 +221,14 @@ const HomeContent = ({ lang, t }) => {
                 </div>
             </section>
 
-            <React.Suspense fallback={<div className="h-64 bg-primary-950/5 animate-pulse" />}>
-                <div className="bg-primary-9000 py-8 md:py-12 relative">
+            <React.Suspense fallback={<div className="h-48 sm:h-56 md:h-64 bg-primary-950/5 animate-pulse" />}>
+                <div className="bg-primary-900 py-6 sm:py-8 md:py-10 lg:py-12 relative">
                     <ScrollVideo
                         src="/videos/drone video greenmist.mp4"
                         title={t('witnessFuture')}
                         subtitle={t('dronesDesigned')}
                     />
-                    <div className="h-8 md:h-12"></div>
+                    <div className="h-6 sm:h-8 md:h-10 lg:h-12"></div>
                     <ScrollVideo
                         src="/videos/sample video drone.mp4"
                         title={t('innovationTitle')}
@@ -224,9 +237,9 @@ const HomeContent = ({ lang, t }) => {
                 </div>
             </React.Suspense>
 
-            <section id="services" ref={whyChooseRef} className="py-8 md:py-12 bg-primary-700 text-white px-4 relative">
+            <section id="services" ref={whyChooseRef} className="py-10 sm:py-12 md:py-14 lg:py-16 bg-primary-700 text-white px-4 sm:px-6 lg:px-8 relative">
                 <div className="container mx-auto max-w-6xl">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-24 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 md:gap-16 lg:gap-24 items-center">
                         <motion.div
                             initial="hidden"
                             whileInView="visible"
@@ -236,14 +249,14 @@ const HomeContent = ({ lang, t }) => {
                                 visible: { opacity: 1, x: 0, transition: { duration: 0.8 } }
                             }}
                         >
-                            <h2 className="text-base sm:text-lg md:text-2xl font-black mb-4 md:mb-6 uppercase tracking-tight leading-loose break-words">
+                            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-black mb-3 sm:mb-4 md:mb-6 uppercase tracking-tight leading-loose break-words">
                                 <TypewriterText text={t('whyChoose')} wordSpacing="0.25em" /> <span className="text-primary-500">Greenmist?</span>
                             </h2>
-                            <p className="text-primary-100/70 text-sm md:text-base mb-8 md:mb-12 font-medium">
+                            <p className="text-primary-100/70 text-sm sm:text-base mb-6 sm:mb-8 md:mb-10 lg:mb-12 font-medium leading-relaxed">
                                 <TypewriterText text={t('tradFarmingHard')} delay={0.5} />
                             </p>
 
-                            <div className="space-y-8 md:space-y-12">
+                            <div className="space-y-6 sm:space-y-8 md:space-y-10 lg:space-y-12">
                                 <CompareItem
                                     label={t('speed')}
                                     drone={t('fifteenMin') + " / " + (lang === 'ta' ? "ஏக்கர்" : "acre")}
@@ -264,7 +277,7 @@ const HomeContent = ({ lang, t }) => {
                                 />
                             </div>
                         </motion.div>
-                        <div className="relative overflow-hidden rounded-[30px] md:rounded-[40px]">
+                        <div className="relative overflow-hidden rounded-2xl sm:rounded-[30px] md:rounded-[40px]">
                             <motion.img
                                 style={{ y: imgY }}
                                 src="/images/hero slider 1 new.png"
@@ -275,30 +288,30 @@ const HomeContent = ({ lang, t }) => {
                             />
                             <motion.div
                                 style={{ y: badgeY }}
-                                className="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 bg-primary-600 p-6 md:p-10 rounded-[20px] md:rounded-[40px] shadow-2xl z-20"
+                                className="absolute -bottom-4 -left-4 sm:-bottom-6 sm:-left-6 md:-bottom-10 md:-left-10 bg-primary-600 p-4 sm:p-6 md:p-8 lg:p-10 rounded-xl sm:rounded-2xl md:rounded-[30px] lg:rounded-[40px] shadow-2xl z-20"
                             >
-                                <p className="text-2xl md:text-4xl font-black mb-1 leading-none">10x</p>
-                                <p className="font-bold uppercase tracking-widest text-[7px] md:text-xs opacity-80">{t('fasterResults')}</p>
+                                <p className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-black mb-0.5 sm:mb-1 leading-none">10x</p>
+                                <p className="font-bold uppercase tracking-widest text-[6px] sm:text-[8px] md:text-xs opacity-80">{t('fasterResults')}</p>
                             </motion.div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <React.Suspense fallback={<div className="h-64 bg-primary-50 animate-pulse" />}>
+            <React.Suspense fallback={<div className="h-40 sm:h-48 bg-primary-50 animate-pulse" />}>
                 <ROICalculator lang={lang} />
             </React.Suspense>
 
-            <React.Suspense fallback={<div className="h-64 bg-white animate-pulse" />}>
+            <React.Suspense fallback={<div className="h-40 sm:h-48 bg-white animate-pulse" />}>
                 <div id="contact">
                     <ContactSection lang={lang} />
                 </div>
             </React.Suspense>
 
-            <footer className="bg-primary-950 py-8 md:py-12 text-center">
-                <div className="container mx-auto px-4">
+            <footer className="bg-primary-950 py-6 sm:py-8 md:py-10 lg:py-12 text-center px-4">
+                <div className="container mx-auto">
                     <div className="flex items-center justify-center gap-2 mb-2">
-                        <div className="relative h-10 w-10 overflow-hidden rounded-full animate-green-glow opacity-80 hover:opacity-100 transition-opacity">
+                        <div className="relative h-8 w-8 sm:h-10 sm:w-10 overflow-hidden rounded-full animate-green-glow opacity-80 hover:opacity-100 transition-opacity">
                             <img
                                 src="/images/logo_round.png"
                                 className="absolute inset-x-0 top-0 w-full h-auto object-cover origin-top"
@@ -307,9 +320,9 @@ const HomeContent = ({ lang, t }) => {
                                 decoding="async"
                             />
                         </div>
-                        <span className="text-xl font-black tracking-tight text-white/40">GREENMIST</span>
+                        <span className="text-lg sm:text-xl font-black tracking-tight text-white/40">GREENMIST</span>
                     </div>
-                    <p className="text-primary-400 font-black tracking-[0.3em] uppercase text-xs">{t('copyright')}</p>
+                    <p className="text-primary-400 font-black tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs">{t('copyright')}</p>
                 </div>
             </footer>
         </>
@@ -322,15 +335,15 @@ const CompareItem = ({ label, drone, trad, delay = 0 }) => (
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.6 }}
-        className="border-l-4 border-primary-800 pl-8 group"
+        className="border-l-4 border-primary-800 pl-4 sm:pl-6 md:pl-8 group"
     >
-        <p className="text-primary-400 text-xs md:text-sm font-black uppercase tracking-widest mb-1 group-hover:text-primary-100 transition-colors">
+        <p className="text-primary-400 text-xs sm:text-sm font-black uppercase tracking-widest mb-1 group-hover:text-primary-100 transition-colors">
             <TypewriterText text={label} delay={delay + 0.2} />
         </p>
-        <p className="text-lg md:text-2xl font-black text-white group-hover:translate-x-2 transition-transform">
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-black text-white group-hover:translate-x-2 transition-transform">
             <TypewriterText text={drone} delay={delay + 0.5} />
         </p>
-        <p className="text-primary-300 text-sm md:text-base line-through opacity-80">
+        <p className="text-primary-300 text-xs sm:text-sm md:text-base line-through opacity-80">
             <TypewriterText text={trad} delay={delay + 0.8} />
         </p>
     </motion.div>
@@ -342,12 +355,12 @@ const SimpleFaq = ({ question, answer, delay = 0 }) => (
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ delay, duration: 0.5 }}
-        className="p-6 md:p-8 bg-primary-50 rounded-[24px] border border-primary-100 hover:bg-white hover:shadow-xl transition-all group"
+        className="p-4 sm:p-6 md:p-8 bg-primary-50 rounded-xl sm:rounded-2xl md:rounded-[24px] border border-primary-100 hover:bg-white hover:shadow-xl transition-all group"
     >
-        <h4 className="text-lg font-black text-primary-900 mb-2">
+        <h4 className="text-base sm:text-lg font-black text-primary-900 mb-2">
             <TypewriterText text={question} delay={delay + 0.5} />
         </h4>
-        <p className="text-primary-700 font-medium">
+        <p className="text-sm sm:text-base text-primary-700 font-medium">
             <TypewriterText text={answer} delay={delay + 0.8} />
         </p>
     </motion.div>
