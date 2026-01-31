@@ -16,14 +16,16 @@ const Toast = ({ message, type = 'success', onClose, duration = 4000 }) => {
                 initial={{ opacity: 0, y: 50, scale: 0.9, rotateX: -15 }}
                 animate={{ opacity: 1, y: 0, scale: 1, rotateX: 0 }}
                 exit={{ opacity: 0, y: 20, scale: 0.95 }}
-                className={`flex items-center gap-4 p-6 rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] border-2 backdrop-blur-xl ${isSuccess
+                className={`flex items-center gap-4 p-6 rounded-[2rem] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)] border-2 backdrop-blur-xl ${
+                    isSuccess
                         ? 'bg-gradient-to-br from-green-600 to-emerald-800 border-green-400 text-white'
                         : 'bg-gradient-to-br from-red-600 to-rose-800 border-red-400 text-white'
-                    }`}
+                }`}
             >
                 {/* Icon Container with glowing effect */}
-                <div className={`flex-shrink-0 h-14 w-14 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12 ${isSuccess ? 'bg-white text-green-700' : 'bg-white text-red-700'
-                    }`}>
+                <div className={`flex-shrink-0 h-14 w-14 rounded-2xl flex items-center justify-center shadow-lg transform -rotate-12 ${
+                    isSuccess ? 'bg-white text-green-700' : 'bg-white text-red-700'
+                }`}>
                     <span className="text-3xl font-black">{isSuccess ? '✓' : '!'}</span>
                 </div>
 
