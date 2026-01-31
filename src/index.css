@@ -1,0 +1,225 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: 'Inter', 'Noto Sans Tamil', system-ui, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light;
+  color: #064e3b;
+  background-color: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+#root {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Clean, readable heading styles */
+h1,
+h2,
+h3,
+h4 {
+  font-family: 'Outfit', 'Noto Sans Tamil', sans-serif !important;
+  font-weight: 800 !important;
+  /* Slightly reduced weight for better Tamil rendering */
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.625rem;
+}
+
+h3 {
+  font-size: 1.375rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.375rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+}
+
+.text-shadow-lg {
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 640px) {
+  :root {
+    font-size: 15px;
+  }
+}
+
+a,
+button {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button {
+  transition: all 0.3s ease;
+}
+
+.greenmist-loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #22c55e;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Contact Section Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-fadeInLeft {
+  animation: fadeInLeft 0.6s ease-out forwards;
+}
+
+.animate-fadeInRight {
+  animation: fadeInRight 0.6s ease-out forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease-out forwards;
+}
+
+/* Navigation hover effects */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #16a34a, #22c55e);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Font families */
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}
+
+.font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.font-playfair {
+  font-family: 'Playfair Display', serif;
+}
