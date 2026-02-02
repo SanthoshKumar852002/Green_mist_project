@@ -237,20 +237,20 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                     <div className="hidden md:flex items-center gap-4">
                         {/* Language Switcher with animation */}
                         <motion.div 
-                            className="flex items-center gap-1 bg-gray-100 rounded-full p-1 relative overflow-hidden"
+                            className="flex items-center bg-gray-100 rounded-full p-1 relative overflow-hidden"
                             whileHover={{ scale: 1.02 }}
                         >
                             <motion.div
                                 className="absolute inset-y-1 bg-primary-600 rounded-full"
                                 animate={{
-                                    x: currentLang === 'en' ? 4 : 52,
-                                    width: currentLang === 'en' ? 44 : 56
+                                    left: currentLang === 'en' ? 4 : 'calc(50% + 2px)',
+                                    width: 'calc(50% - 6px)'
                                 }}
                                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                             />
                             <button
                                 onClick={() => onSelectLang('en')}
-                                className={`px-4 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 ${
+                                className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[50px] ${
                                     currentLang === 'en' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
                                 }`}
                             >
@@ -258,7 +258,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                             </button>
                             <button
                                 onClick={() => onSelectLang('ta')}
-                                className={`px-4 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 ${
+                                className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[70px] whitespace-nowrap ${
                                     currentLang === 'ta' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
                                 }`}
                             >

@@ -15,59 +15,56 @@ import Toast from "./Toast";
 
 // Floating label input component
 const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInput, placeholder, value, onChange }) => {
-    const [isFocused, setIsFocused] = useState(false);
-    const [hasValue, setHasValue] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const [hasValue, setHasValue] = useState(false);
 
-    return (
-        <motion.div 
-            className="relative"
-            whileHover={{ scale: 1.01 }}
-        >
-            <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-none ${
-                isFocused || hasValue ? 'opacity-0 -translate-x-4' : 'opacity-50'
-            }`}>
-                <Icon className="w-5 h-5 text-white/60" />
-            </div>
-            <input
-                name={name}
-                type={type}
-                required={required}
-                onInput={onInput}
-                placeholder={isFocused ? placeholder : ''}
-                onFocus={() => setIsFocused(true)}
-                onBlur={(e) => {
-                    setIsFocused(false);
-                    setHasValue(e.target.value.length > 0);
-                }}
-                onChange={(e) => {
-                    setHasValue(e.target.value.length > 0);
-                    onChange?.(e);
-                }}
-                className={`w-full p-4 rounded-xl bg-white/5 border-2 transition-all duration-300 outline-none font-bold ${
-                    isFocused 
-                        ? 'border-emerald-500 bg-white/10 pl-4' 
-                        : 'border-white/10 pl-12 hover:border-white/30'
-                }`}
-            />
-            <motion.label
-                className={`absolute left-4 transition-all duration-300 font-semibold ${
-                    isFocused || hasValue
-                        ? '-top-2.5 text-xs bg-primary-700 px-2 text-emerald-400'
-                        : 'top-1/2 -translate-y-1/2 text-sm text-transparent'
-                }`}
-            >
-                {label}
-            </motion.label>
-            {isFocused && (
-                <motion.div
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.3 }}
-                />
-            )}
-        </motion.div>
-    );
+  return (
+    <motion.div
+      className="relative"
+      whileHover={{ scale: 1.01 }}
+    >
+      <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-none ${isFocused || hasValue ? 'opacity-0 -translate-x-4' : 'opacity-100'
+        }`}>
+        <Icon className="w-5 h-5 text-emerald-400" />
+      </div>
+      <input
+        name={name}
+        type={type}
+        required={required}
+        onInput={onInput}
+        placeholder={isFocused ? placeholder : label}
+        onFocus={() => setIsFocused(true)}
+        onBlur={(e) => {
+          setIsFocused(false);
+          setHasValue(e.target.value.length > 0);
+        }}
+        onChange={(e) => {
+          setHasValue(e.target.value.length > 0);
+          onChange?.(e);
+        }}
+        className={`w-full p-4 rounded-xl bg-white/5 border-2 transition-all duration-300 outline-none font-bold placeholder:text-white/50 placeholder:font-medium ${isFocused
+            ? 'border-emerald-500 bg-white/10 pl-4'
+            : 'border-white/10 pl-12 hover:border-white/30'
+          }`}
+      />
+      <motion.label
+        className={`absolute left-4 transition-all duration-300 font-semibold ${isFocused || hasValue
+            ? '-top-2.5 text-xs bg-primary-700 px-2 text-emerald-400'
+            : 'top-1/2 -translate-y-1/2 text-sm text-transparent'
+          }`}
+      >
+        {label}
+      </motion.label>
+      {isFocused && (
+        <motion.div
+          className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500"
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+      )}
+    </motion.div>
+  );
 };
 
 const ContactSection = ({ lang }) => {
@@ -259,7 +256,7 @@ const ContactSection = ({ lang }) => {
   return (
     <section id="contact" className="py-6 md:py-8 bg-slate-50 relative overflow-hidden">
       {/* Animated background blobs */}
-      <motion.div 
+      <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-green-200/30 rounded-full blur-[100px]"
         animate={{
           x: [0, 100, 0],
@@ -267,7 +264,7 @@ const ContactSection = ({ lang }) => {
         }}
         transition={{ duration: 20, repeat: Infinity }}
       />
-      <motion.div 
+      <motion.div
         className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-200/20 rounded-full blur-[120px]"
         animate={{
           x: [0, -50, 0],
@@ -277,7 +274,7 @@ const ContactSection = ({ lang }) => {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-        <motion.div 
+        <motion.div
           className="bg-white/80 backdrop-blur-md rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(34,197,94,0.2)] p-6 sm:p-8 md:p-10 border border-white"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -298,7 +295,7 @@ const ContactSection = ({ lang }) => {
           <div className="max-w-[1400px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch pt-4 sm:pt-8">
               {/* FAQ Section */}
-              <motion.div 
+              <motion.div
                 className="flex flex-col h-full"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -318,13 +315,12 @@ const ContactSection = ({ lang }) => {
 
                   <div className="space-y-3 sm:space-y-4">
                     {faqs.map((faq, i) => (
-                      <motion.div 
-                        key={i} 
-                        className={`border rounded-xl sm:rounded-[1.5rem] transition-all duration-300 overflow-hidden ${
-                          openFaq === i 
-                            ? 'border-primary-500 bg-white shadow-lg shadow-emerald-500/10' 
+                      <motion.div
+                        key={i}
+                        className={`border rounded-xl sm:rounded-[1.5rem] transition-all duration-300 overflow-hidden ${openFaq === i
+                            ? 'border-primary-500 bg-white shadow-lg shadow-emerald-500/10'
                             : 'border-primary-100 bg-white/50 hover:bg-white hover:border-primary-200'
-                        }`}
+                          }`}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -341,9 +337,8 @@ const ContactSection = ({ lang }) => {
                           <motion.div
                             animate={{ rotate: openFaq === i ? 180 : 0 }}
                             transition={{ duration: 0.3 }}
-                            className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${
-                              openFaq === i ? 'bg-emerald-500 text-white' : 'bg-primary-100 text-primary-600'
-                            }`}
+                            className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openFaq === i ? 'bg-emerald-500 text-white' : 'bg-primary-100 text-primary-600'
+                              }`}
                           >
                             <ChevronDown className="w-5 h-5" />
                           </motion.div>
@@ -369,7 +364,7 @@ const ContactSection = ({ lang }) => {
               </motion.div>
 
               {/* Enquiry Form */}
-              <motion.div 
+              <motion.div
                 className="flex flex-col h-full"
                 initial={{ opacity: 0, x: 30 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -380,7 +375,7 @@ const ContactSection = ({ lang }) => {
                   {/* Decorative elements */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-emerald-500/20 rounded-full blur-3xl" />
                   <div className="absolute bottom-0 left-0 w-32 h-32 bg-teal-500/20 rounded-full blur-3xl" />
-                  
+
                   {/* Progress bar */}
                   <div className="absolute top-0 left-0 right-0 h-1 bg-white/10">
                     <motion.div
@@ -391,7 +386,7 @@ const ContactSection = ({ lang }) => {
                   </div>
 
                   <h3 className="text-lg sm:text-xl md:text-2xl font-black mb-6 sm:mb-8 flex items-center gap-3 uppercase tracking-tight relative">
-                    {t("quickInquiry")} 
+                    {t("quickInquiry")}
                     <motion.div
                       animate={{ rotate: [0, 15, -15, 0] }}
                       transition={{ duration: 2, repeat: Infinity }}
@@ -414,12 +409,12 @@ const ContactSection = ({ lang }) => {
                         <div className="flex bg-white/5 border-2 border-white/10 rounded-xl items-center px-4 focus-within:border-emerald-500 focus-within:bg-white/10 transition-all">
                           <Phone className="w-5 h-5 text-emerald-400 mr-2 flex-shrink-0" />
                           <span className="text-emerald-400 font-bold mr-2">+91</span>
-                          <input 
-                            name="Mobile" 
-                            required 
-                            onInput={handlePhoneChange} 
-                            placeholder="0000000000" 
-                            className="w-full bg-transparent py-4 outline-none font-bold" 
+                          <input
+                            name="Mobile"
+                            required
+                            onInput={handlePhoneChange}
+                            placeholder="0000000000"
+                            className="w-full bg-transparent py-4 outline-none font-bold"
                           />
                         </div>
                       </div>
@@ -427,17 +422,17 @@ const ContactSection = ({ lang }) => {
 
                     <div className="relative">
                       <MessageCircle className="absolute left-4 top-4 w-5 h-5 text-white/40" />
-                      <textarea 
-                        name="Message" 
-                        rows="3" 
-                        required 
-                        placeholder={t("messagePlaceholder")} 
-                        className="w-full p-4 pl-12 rounded-xl bg-white/5 border-2 border-white/10 focus:border-emerald-500 focus:bg-white/10 outline-none font-bold resize-none transition-all" 
+                      <textarea
+                        name="Message"
+                        rows="3"
+                        required
+                        placeholder={t("messagePlaceholder")}
+                        className="w-full p-4 pl-12 rounded-xl bg-white/5 border-2 border-white/10 focus:border-emerald-500 focus:bg-white/10 outline-none font-bold resize-none transition-all"
                       />
                     </div>
 
                     {/* Captcha */}
-                    <motion.div 
+                    <motion.div
                       className="flex flex-col sm:flex-row gap-4 items-center bg-white/5 p-4 rounded-2xl border border-white/10"
                       whileHover={{ borderColor: 'rgba(52, 211, 153, 0.5)' }}
                     >
@@ -450,25 +445,25 @@ const ContactSection = ({ lang }) => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       />
-                      <motion.button 
-                        type="button" 
-                        onClick={generateCaptcha} 
+                      <motion.button
+                        type="button"
+                        onClick={generateCaptcha}
                         className="p-2 text-emerald-400 hover:text-emerald-300"
                         whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5 }}
                       >
                         <RefreshCcw />
                       </motion.button>
-                      <input 
-                        value={captchaInput} 
-                        onChange={(e) => setCaptchaInput(e.target.value)} 
-                        placeholder="CODE" 
-                        className="w-full sm:w-32 p-3 rounded-xl bg-white/5 border-2 border-white/10 uppercase font-black text-center tracking-widest focus:border-emerald-500 outline-none transition-all" 
+                      <input
+                        value={captchaInput}
+                        onChange={(e) => setCaptchaInput(e.target.value)}
+                        placeholder="CODE"
+                        className="w-full sm:w-32 p-3 rounded-xl bg-white/5 border-2 border-white/10 uppercase font-black text-center tracking-widest focus:border-emerald-500 outline-none transition-all"
                       />
                     </motion.div>
 
-                    <motion.button 
-                      disabled={status === "submitting"} 
+                    <motion.button
+                      disabled={status === "submitting"}
                       className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-primary-950 py-4 md:py-5 rounded-2xl font-black text-base md:text-xl uppercase tracking-widest transition-all shadow-xl disabled:opacity-50 relative overflow-hidden group"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -533,7 +528,7 @@ const ContactSection = ({ lang }) => {
                   transition={{ delay: i * 0.1 }}
                   whileHover={{ y: -5 }}
                 >
-                  <motion.div 
+                  <motion.div
                     className="bg-emerald-50 text-emerald-600 p-3 sm:p-4 rounded-xl sm:rounded-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all"
                     whileHover={{ rotate: [0, -10, 10, 0] }}
                   >

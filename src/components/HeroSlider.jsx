@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '../utils/i18n';
 
@@ -23,8 +23,18 @@ const slides = [
     },
 ];
 
-// Floating particle component
-const FloatingParticle = ({ delay, duration, size, left }) => (
+// Preload images utility
+const preloadImage = (src) => {
+    return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = resolve;
+        img.onerror = reject;
+        img.src = src;
+    });
+};
+
+// Floating particle component - memoized
+const FloatingParticle = React.memo(({ delay, duration, size, left }) => (
     <motion.div
         className="absolute rounded-full bg-emerald-400/30 blur-sm"
         style={{ width: size, height: size, left: `${left}%` }}
@@ -40,76 +50,104 @@ const FloatingParticle = ({ delay, duration, size, left }) => (
             ease: 'linear',
         }}
     />
-);
+));
 
 const HeroSlider = ({ lang }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const { t } = useTranslation(lang);
-    const [isLoaded, setIsLoaded] = useState(false);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+    const [firstImageLoaded, setFirstImageLoaded] = useState(false);
     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
     const current = useMemo(() => slides[currentSlide], [currentSlide]);
 
+    // Preload first image immediately, then others
     useEffect(() => {
+        // Load first image with high priority
+        preloadImage(slides[0].image)
+            .then(() => setFirstImageLoaded(true))
+            .catch(() => setFirstImageLoaded(true));
+
+        // Preload remaining images in background
+        const preloadRest = async () => {
+            const promises = slides.slice(1).map(slide => preloadImage(slide.image));
+            await Promise.allSettled(promises);
+            setImagesLoaded(true);
+        };
+
+        // Delay loading other images until first is ready
+        const timer = setTimeout(preloadRest, 100);
+        return () => clearTimeout(timer);
+    }, []);
+
+    useEffect(() => {
+        if (!firstImageLoaded) return;
         const timer = setInterval(() => {
             setCurrentSlide((prev) => (prev + 1) % slides.length);
         }, 5000);
         return () => clearInterval(timer);
-    }, []);
+    }, [firstImageLoaded]);
 
-    // Parallax mouse effect
+    // Throttled parallax mouse effect
     useEffect(() => {
+        let rafId;
         const handleMouseMove = (e) => {
-            const { clientX, clientY } = e;
-            const x = (clientX / window.innerWidth - 0.5) * 20;
-            const y = (clientY / window.innerHeight - 0.5) * 20;
-            setMousePosition({ x, y });
+            if (rafId) return;
+            rafId = requestAnimationFrame(() => {
+                const { clientX, clientY } = e;
+                const x = (clientX / window.innerWidth - 0.5) * 20;
+                const y = (clientY / window.innerHeight - 0.5) * 20;
+                setMousePosition({ x, y });
+                rafId = null;
+            });
         };
-        window.addEventListener('mousemove', handleMouseMove);
-        return () => window.removeEventListener('mousemove', handleMouseMove);
+        window.addEventListener('mousemove', handleMouseMove, { passive: true });
+        return () => {
+            window.removeEventListener('mousemove', handleMouseMove);
+            if (rafId) cancelAnimationFrame(rafId);
+        };
     }, []);
 
-    const scrollToContact = () => {
+    const scrollToContact = useCallback(() => {
         const element = document.getElementById('contact');
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
-    };
+    }, []);
 
-    // Generate particles
-    const particles = useMemo(() => 
-        Array.from({ length: 15 }, (_, i) => ({
+    // Generate particles - reduced count for performance
+    const particles = useMemo(() =>
+        Array.from({ length: 8 }, (_, i) => ({
             id: i,
-            delay: i * 0.5,
+            delay: i * 0.8,
             duration: 8 + Math.random() * 4,
             size: 4 + Math.random() * 8,
             left: Math.random() * 100,
         })),
-    []);
+        []);
 
     return (
-        <div className="relative h-[55vh] sm:h-[60vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden bg-black">
-            {/* Floating Particles */}
-            <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
-                {particles.map((particle) => (
-                    <FloatingParticle key={particle.id} {...particle} />
-                ))}
-            </div>
+        <div className="relative h-[55vh] sm:h-[60vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden bg-gradient-to-b from-primary-900 to-primary-950">
+            {/* Placeholder gradient shown while loading */}
+            {!firstImageLoaded && (
+                <div className="absolute inset-0 z-50 bg-gradient-to-br from-primary-800 via-primary-900 to-emerald-900 animate-pulse" />
+            )}
 
-            {/* Animated gradient overlay */}
-            <motion.div 
+            {/* Floating Particles - only render after first image loads */}
+            {firstImageLoaded && (
+                <div className="absolute inset-0 z-30 pointer-events-none overflow-hidden">
+                    {particles.map((particle) => (
+                        <FloatingParticle key={particle.id} {...particle} />
+                    ))}
+                </div>
+            )}
+
+            {/* Simplified gradient overlay */}
+            <div
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{
                     background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.3) 100%)',
                 }}
-                animate={{
-                    background: [
-                        'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.3) 100%)',
-                        'radial-gradient(circle at 70% 70%, transparent 0%, rgba(0,0,0,0.3) 100%)',
-                        'radial-gradient(circle at 30% 30%, transparent 0%, rgba(0,0,0,0.3) 100%)',
-                    ]
-                }}
-                transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
             />
 
             <div className="absolute inset-0 overflow-hidden">
@@ -118,56 +156,50 @@ const HeroSlider = ({ lang }) => {
                     <motion.div
                         key={currentSlide}
                         className="absolute inset-0"
-                        initial={{ opacity: 0, scale: 1.1 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.95 }}
-                        transition={{ duration: 0.8 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        <motion.img
+                        <img
                             src={slides[currentSlide].image}
                             alt="Slide"
                             loading={currentSlide === 0 ? "eager" : "lazy"}
                             fetchPriority={currentSlide === 0 ? "high" : "auto"}
                             decoding="async"
-                            className="w-full h-full object-cover"
-                            style={{ 
+                            className="w-full h-full object-cover will-change-transform"
+                            style={{
                                 objectPosition: 'center 5%',
-                                transform: `translate(${mousePosition.x}px, ${mousePosition.y}px) scale(1.05)`,
+                                transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0) scale(1.05)`,
                             }}
-                            onLoad={() => setIsLoaded(true)}
-                            onError={() => setIsLoaded(true)}
                         />
                     </motion.div>
                 </AnimatePresence>
             </div>
 
+            {/* Content - show immediately with text */}
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={`content-${currentSlide}`}
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -30 }}
-                            transition={{ duration: 0.5, delay: 0.2 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
                         >
-                            <motion.h1 
-                                className="text-white mb-2 sm:mb-3 md:mb-4 drop-shadow-2xl text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl uppercase tracking-tight leading-tight"
+                            <h1
+                                className="text-white mb-1 sm:mb-3 md:mb-4 drop-shadow-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase tracking-tight leading-tight"
                                 style={{
                                     textShadow: '0 4px 30px rgba(0,0,0,0.5)',
                                 }}
                             >
                                 {t(current.titleKey)}
-                            </motion.h1>
+                            </h1>
 
-                            <motion.p 
-                                className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 mb-4 sm:mb-6 md:mb-8 font-medium tracking-wide max-w-3xl mx-auto leading-relaxed px-2 sm:px-4"
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.4 }}
-                            >
+                            <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 mb-4 sm:mb-6 md:mb-8 font-medium tracking-wide max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
                                 {t(current.subtitleKey)}
-                            </motion.p>
+                            </p>
                         </motion.div>
                     </AnimatePresence>
 
@@ -175,32 +207,18 @@ const HeroSlider = ({ lang }) => {
                         type="button"
                         onClick={scrollToContact}
                         className="group relative px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 bg-primary-600 text-white rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-black overflow-hidden shadow-xl uppercase tracking-wider sm:tracking-widest"
-                        whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(16, 185, 129, 0.4)' }}
+                        whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.6 }}
                     >
                         <span className="relative z-10 flex items-center gap-2">
                             {t('contactUs')}
-                            <motion.span
-                                animate={{ x: [0, 5, 0] }}
-                                transition={{ duration: 1.5, repeat: Infinity }}
-                            >
-                                →
-                            </motion.span>
+                            <span>→</span>
                         </span>
-                        <motion.div 
-                            className="absolute inset-0 bg-gradient-to-r from-primary-900 to-emerald-600"
-                            initial={{ x: '-100%' }}
-                            whileHover={{ x: 0 }}
-                            transition={{ duration: 0.3 }}
-                        />
                     </motion.button>
                 </div>
             </div>
 
-            {/* Enhanced Dots with progress indicator */}
+            {/* Dots */}
             <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 -translate-x-1/2 z-30 flex gap-2 sm:gap-3">
                 {slides.map((_, index) => (
                     <button
@@ -222,21 +240,6 @@ const HeroSlider = ({ lang }) => {
                     </button>
                 ))}
             </div>
-
-            {/* Scroll indicator */}
-            <motion.div
-                className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 z-30"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-            >
-                <div className="w-6 h-10 rounded-full border-2 border-white/50 flex justify-center pt-2">
-                    <motion.div
-                        className="w-1 h-2 bg-white rounded-full"
-                        animate={{ y: [0, 12, 0], opacity: [1, 0, 1] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                    />
-                </div>
-            </motion.div>
         </div>
     );
 };
