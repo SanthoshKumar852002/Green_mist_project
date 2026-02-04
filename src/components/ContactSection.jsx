@@ -23,16 +23,16 @@ const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInp
       className="relative"
       whileHover={{ scale: 1.01 }}
     >
-      <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-none ${isFocused || hasValue ? 'opacity-0 -translate-x-4' : 'opacity-100'
+      <div className={`absolute left-4 top-1/2 -translate-y-1/2 transition-all duration-300 pointer-events-none ${isFocused || hasValue ? 'opacity-0 -translate-x-4' : 'opacity-50'
         }`}>
-        <Icon className="w-5 h-5 text-emerald-400" />
+        <Icon className="w-5 h-5 text-white/60" />
       </div>
       <input
         name={name}
         type={type}
         required={required}
         onInput={onInput}
-        placeholder={isFocused ? placeholder : label}
+        placeholder={isFocused ? placeholder : ''}
         onFocus={() => setIsFocused(true)}
         onBlur={(e) => {
           setIsFocused(false);
@@ -42,15 +42,15 @@ const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInp
           setHasValue(e.target.value.length > 0);
           onChange?.(e);
         }}
-        className={`w-full p-4 rounded-xl bg-white/5 border-2 transition-all duration-300 outline-none font-bold placeholder:text-white/50 placeholder:font-medium ${isFocused
-            ? 'border-emerald-500 bg-white/10 pl-4'
-            : 'border-white/10 pl-12 hover:border-white/30'
+        className={`w-full p-4 rounded-xl bg-white/5 border-2 transition-all duration-300 outline-none font-bold ${isFocused
+          ? 'border-emerald-500 bg-white/10 pl-4'
+          : 'border-white/10 pl-12 hover:border-white/30'
           }`}
       />
       <motion.label
         className={`absolute left-4 transition-all duration-300 font-semibold ${isFocused || hasValue
-            ? '-top-2.5 text-xs bg-primary-700 px-2 text-emerald-400'
-            : 'top-1/2 -translate-y-1/2 text-sm text-transparent'
+          ? '-top-2.5 text-xs bg-primary-700 px-2 text-emerald-400'
+          : 'top-1/2 -translate-y-1/2 text-sm text-transparent'
           }`}
       >
         {label}
@@ -254,7 +254,13 @@ const ContactSection = ({ lang }) => {
   ];
 
   return (
-    <section id="contact" className="py-6 md:py-8 bg-slate-50 relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-6 md:py-8 bg-slate-50 relative overflow-hidden"
+      aria-labelledby="contact-heading"
+      itemScope
+      itemType="https://schema.org/ContactPage"
+    >
       {/* Animated background blobs */}
       <motion.div
         className="absolute top-0 left-0 w-96 h-96 bg-green-200/30 rounded-full blur-[100px]"
@@ -281,6 +287,10 @@ const ContactSection = ({ lang }) => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          {/* Hidden H1 for SEO if this is main contact page */}
+          <h1 id="contact-heading" className="sr-only">
+            {lang === 'ta' ? 'கிரீன் மிஸ்ட் - எங்களை தொடர்பு கொள்ளுங்கள்' : 'Contact Green Mist - Agricultural Drone Services'}
+          </h1>
 
           <AnimatePresence>
             {notification && (
@@ -294,16 +304,26 @@ const ContactSection = ({ lang }) => {
 
           <div className="max-w-[1400px] mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch pt-4 sm:pt-8">
-              {/* FAQ Section */}
-              <motion.div
+              {/* FAQ Section with Schema */}
+              <motion.aside
                 className="flex flex-col h-full"
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
+                aria-label="Frequently Asked Questions"
+                itemScope
+                itemType="https://schema.org/FAQPage"
               >
                 <div className="bg-gradient-to-br from-primary-50/80 to-emerald-50/80 border border-primary-100 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] h-full shadow-lg">
-                  <h2 className="text-xl sm:text-2xl md:text-3xl font-black mb-6 sm:mb-8 text-primary-900 tracking-tight flex items-center gap-3">
+
+                  <h2
+                    className="text-xl sm:text-2xl md:text-3xl font-black mb-6 sm:mb-8 text-primary-900 tracking-tight flex items-center gap-3"
+                    style={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontWeight: 700,
+                    }}
+                  >
                     {t("commonQuestions")}
                     <motion.span
                       animate={{ rotate: [0, 10, -10, 0] }}
@@ -313,25 +333,28 @@ const ContactSection = ({ lang }) => {
                     </motion.span>
                   </h2>
 
-                  <div className="space-y-3 sm:space-y-4">
+                  <div className="space-y-3 sm:space-y-4" role="list">
                     {faqs.map((faq, i) => (
-                      <motion.div
+                      <article
                         key={i}
+                        itemScope
+                        itemProp="mainEntity"
+                        itemType="https://schema.org/Question"
                         className={`border rounded-xl sm:rounded-[1.5rem] transition-all duration-300 overflow-hidden ${openFaq === i
-                            ? 'border-primary-500 bg-white shadow-lg shadow-emerald-500/10'
-                            : 'border-primary-100 bg-white/50 hover:bg-white hover:border-primary-200'
+                          ? 'border-primary-500 bg-white shadow-lg shadow-emerald-500/10'
+                          : 'border-primary-100 bg-white/50 hover:bg-white hover:border-primary-200'
                           }`}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.1 }}
-                        whileHover={{ scale: openFaq === i ? 1 : 1.01 }}
                       >
                         <button
                           onClick={() => setOpenFaq(openFaq === i ? null : i)}
                           className="w-full p-4 sm:p-5 flex justify-between items-center font-bold text-left"
+                          aria-expanded={openFaq === i}
+                          aria-controls={`faq-answer-${i}`}
                         >
-                          <span className="text-primary-900 uppercase tracking-tight text-xs sm:text-sm md:text-base font-black leading-snug pr-4">
+                          <span
+                            itemProp="name"
+                            className="text-primary-900 uppercase tracking-tight text-xs sm:text-sm md:text-base font-black leading-snug pr-4"
+                          >
                             {faq.q}
                           </span>
                           <motion.div
@@ -339,6 +362,7 @@ const ContactSection = ({ lang }) => {
                             transition={{ duration: 0.3 }}
                             className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-colors ${openFaq === i ? 'bg-emerald-500 text-white' : 'bg-primary-100 text-primary-600'
                               }`}
+                            aria-hidden="true"
                           >
                             <ChevronDown className="w-5 h-5" />
                           </motion.div>
@@ -346,22 +370,29 @@ const ContactSection = ({ lang }) => {
                         <AnimatePresence>
                           {openFaq === i && (
                             <motion.div
+                              id={`faq-answer-${i}`}
+                              itemScope
+                              itemProp="acceptedAnswer"
+                              itemType="https://schema.org/Answer"
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.3 }}
                             >
-                              <p className="px-4 sm:px-5 pb-4 sm:pb-5 text-gray-600 leading-relaxed text-sm md:text-base font-medium">
+                              <p
+                                itemProp="text"
+                                className="px-4 sm:px-5 pb-4 sm:pb-5 text-gray-600 leading-relaxed text-sm md:text-base font-medium"
+                              >
                                 {faq.a}
                               </p>
                             </motion.div>
                           )}
                         </AnimatePresence>
-                      </motion.div>
+                      </article>
                     ))}
                   </div>
                 </div>
-              </motion.div>
+              </motion.aside>
 
               {/* Enquiry Form */}
               <motion.div
@@ -395,39 +426,60 @@ const ContactSection = ({ lang }) => {
                     </motion.div>
                   </h3>
 
-                  <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6 relative" onChange={updateProgress}>
+                  <form
+                    onSubmit={handleSubmit}
+                    className="space-y-5 sm:space-y-6 relative"
+                    onChange={updateProgress}
+                    aria-label="Contact inquiry form"
+                    itemScope
+                    itemType="https://schema.org/ContactAction"
+                  >
                     <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
-                      <FloatingInput
-                        label={t("formName")}
-                        icon={User}
-                        name="Name"
-                        required
-                        onInput={handleNameChange}
-                        placeholder={t("namePlaceholder")}
-                      />
+                      <div>
+                        <label htmlFor="contact-name" className="sr-only">{t("formName")}</label>
+                        <FloatingInput
+                          id="contact-name"
+                          label={t("formName")}
+                          icon={User}
+                          name="Name"
+                          required
+                          onInput={handleNameChange}
+                          placeholder={t("namePlaceholder")}
+                          aria-required="true"
+                        />
+                      </div>
                       <div className="relative">
+                        <label htmlFor="contact-phone" className="sr-only">Phone Number</label>
                         <div className="flex bg-white/5 border-2 border-white/10 rounded-xl items-center px-4 focus-within:border-emerald-500 focus-within:bg-white/10 transition-all">
-                          <Phone className="w-5 h-5 text-emerald-400 mr-2 flex-shrink-0" />
-                          <span className="text-emerald-400 font-bold mr-2">+91</span>
+                          <Phone className="w-5 h-5 text-emerald-400 mr-2 flex-shrink-0" aria-hidden="true" />
+                          <span className="text-emerald-400 font-bold mr-2" aria-label="Country code">+91</span>
                           <input
+                            id="contact-phone"
                             name="Mobile"
+                            type="tel"
                             required
                             onInput={handlePhoneChange}
                             placeholder="0000000000"
+                            pattern="[6-9][0-9]{9}"
                             className="w-full bg-transparent py-4 outline-none font-bold"
+                            aria-required="true"
+                            itemProp="telephone"
                           />
                         </div>
                       </div>
                     </div>
 
                     <div className="relative">
-                      <MessageCircle className="absolute left-4 top-4 w-5 h-5 text-white/40" />
+                      <label htmlFor="contact-message" className="sr-only">Message</label>
+                      <MessageCircle className="absolute left-4 top-4 w-5 h-5 text-white/40" aria-hidden="true" />
                       <textarea
+                        id="contact-message"
                         name="Message"
                         rows="3"
                         required
                         placeholder={t("messagePlaceholder")}
                         className="w-full p-4 pl-12 rounded-xl bg-white/5 border-2 border-white/10 focus:border-emerald-500 focus:bg-white/10 outline-none font-bold resize-none transition-all"
+                        aria-required="true"
                       />
                     </div>
 
@@ -500,47 +552,71 @@ const ContactSection = ({ lang }) => {
             </div>
 
             {/* Contact Details Cards */}
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12 max-w-4xl mx-auto">
-              {[
-                {
-                  icon: MessageSquare,
-                  label: t("whatsappLabel"),
-                  content: (
-                    <div className="space-y-0.5">
-                      <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">78999 78869</p>
-                      <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">91503 95864</p>
-                      <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">90039 92693</p>
-                    </div>
-                  )
-                },
-                {
-                  icon: MapPin,
-                  label: t("locationLabel"),
-                  content: <p className="font-bold text-primary-950 text-sm sm:text-base md:text-lg leading-snug whitespace-pre-line">{t("address")}</p>
-                }
-              ].map((item, i) => (
-                <motion.div
-                  key={i}
-                  className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ y: -5 }}
-                >
-                  <motion.div
-                    className="bg-emerald-50 text-emerald-600 p-3 sm:p-4 rounded-xl sm:rounded-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all"
-                    whileHover={{ rotate: [0, -10, 10, 0] }}
-                  >
-                    <item.icon className="w-5 h-5 sm:w-6 sm:h-6" />
-                  </motion.div>
-                  <div>
-                    <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{item.label}</p>
-                    {item.content}
+            <address
+              className="grid md:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12 max-w-4xl mx-auto not-italic"
+              itemScope
+              itemType="https://schema.org/LocalBusiness"
+            >
+              <meta itemProp="name" content="GREENMIST Agriculture Drone" />
+
+              <motion.div
+                className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-emerald-50 text-emerald-600 p-3 sm:p-4 rounded-xl sm:rounded-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                  <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{t("whatsappLabel")}</p>
+                  <div className="space-y-0.5">
+                    <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">
+                      <a href="tel:+917899978869" itemProp="telephone" className="hover:text-emerald-600 transition-colors">+91 78999 78869</a>
+                    </p>
+                    <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">
+                      <a href="tel:+919150395864" itemProp="telephone" className="hover:text-emerald-600 transition-colors">+91 91503 95864</a>
+                    </p>
+                    <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">
+                      <a href="tel:+919003992693" itemProp="telephone" className="hover:text-emerald-600 transition-colors">+91 90039 92693</a>
+                    </p>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-emerald-50 text-emerald-600 p-3 sm:p-4 rounded-xl sm:rounded-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                  <MapPin className="w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
+                </div>
+                <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{t("locationLabel")}</p>
+                  <p className="font-bold text-primary-950 text-sm sm:text-base md:text-lg leading-snug">
+                    {lang === 'ta' ? (
+                      <>
+                        <span itemProp="streetAddress">மணிக்கம்பாளையம்</span><br />
+                        <span itemProp="addressLocality">திருச்செங்கோடு</span>, <span itemProp="addressRegion">தமிழ்நாடு</span><br />
+                        <span itemProp="postalCode">637202</span>, <span itemProp="addressCountry">இந்தியா</span>
+                      </>
+                    ) : (
+                      <>
+                        <span itemProp="streetAddress">Manickampalayam</span><br />
+                        <span itemProp="addressLocality">Tiruchengode</span>, <span itemProp="addressRegion">Tamil Nadu</span><br />
+                        <span itemProp="postalCode">637202</span>, <span itemProp="addressCountry">India</span>
+                      </>
+                    )}
+                  </p>
+                </div>
+              </motion.div>
+            </address>
           </div>
         </motion.div>
       </div>

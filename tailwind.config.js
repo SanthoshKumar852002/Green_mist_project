@@ -20,12 +20,15 @@ export default {
                     900: '#064e3b',
                     950: '#022c22',
                 },
-                // Removing other complex colors to enforce simplicity as requested
-
             },
             fontFamily: {
-                logo: ['Syne', 'sans-serif'],
+                'sans': ['Montserrat', 'sans-serif'],
+                'montserrat': ['Montserrat', 'sans-serif'],
+                'logo': ['Playfair Display', 'serif'],
                 nav: ['Outfit', 'sans-serif'],
+            },
+            fontWeight: {
+                'semibold': 600,
             },
         },
     },

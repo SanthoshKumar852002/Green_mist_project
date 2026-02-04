@@ -2,22 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Global Font Settings */
+* {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 :root {
   font-family: 'Inter', 'Noto Sans Tamil', system-ui, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light;
-  color: #064e3b;
-  background-color: #ffffff;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
@@ -279,9 +279,12 @@ html {
 
 /* Glow animation */
 @keyframes glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
   }
+
   50% {
     box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
   }
@@ -297,6 +300,7 @@ html {
     transform: scale(1);
     opacity: 0.5;
   }
+
   100% {
     transform: scale(1.5);
     opacity: 0;

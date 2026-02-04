@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import Home from './pages/Home';
 
 const translations = {
@@ -112,19 +112,24 @@ const translations = {
     }
 };
 
-const App = () => {
-    const [lang, setLang] = useState(() => localStorage.getItem('lang') || 'en');
+function App() {
+    const [lang, setLang] = useState(() => {
+        // Check localStorage for saved language preference
+        const saved = localStorage.getItem('preferredLanguage');
+        return saved || 'en';
+    });
 
-    const t = useCallback((key) => {
-        return translations[lang]?.[key] || translations['en']?.[key] || key;
-    }, [lang]);
-
-    const handleSelectLang = useCallback((newLang) => {
-        localStorage.setItem('lang', newLang);
+    const handleSelectLang = (newLang) => {
         setLang(newLang);
-    }, []);
+        localStorage.setItem('preferredLanguage', newLang);
+    };
 
-    return <Home lang={lang} onSelectLang={handleSelectLang} t={t} />;
-};
+    return (
+        <Home 
+            lang={lang} 
+            onSelectLang={handleSelectLang} 
+        />
+    );
+}
 
 export default App;

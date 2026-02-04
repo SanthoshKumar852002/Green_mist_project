@@ -8,7 +8,7 @@ const AnimatedNumber = ({ value, suffix = '', prefix = '' }) => {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
     const spring = useSpring(0, { duration: 2000 });
-    const display = useTransform(spring, (current) => 
+    const display = useTransform(spring, (current) =>
         `${prefix}${Math.round(current).toLocaleString()}${suffix}`
     );
 
@@ -111,18 +111,23 @@ const ROICalculator = ({ lang }) => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight">
-                            {t('calcTitle')}
+                        <h2
+                            className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight"
+                            style={{
+                                fontFamily: "'Montserrat', sans-serif",
+                                fontWeight: 700,
+                            }}
+                        >
+                            Calculate Your Savings
                         </h2>
                         <p className="text-primary-100 text-sm sm:text-base mb-6 sm:mb-8 md:mb-10 opacity-90 leading-relaxed">
                             {t('calcDesc')}
                         </p>
 
                         {/* Interactive Slider Card */}
-                        <motion.div 
-                            className={`bg-white/10 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl backdrop-blur-md border transition-all duration:300 ${
-                                isInteracting ? 'border-emerald-400 shadow-lg shadow-emerald-500/20' : 'border-white/20'
-                            }`}
+                        <motion.div
+                            className={`bg-white/10 p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl backdrop-blur-md border transition-all duration:300 ${isInteracting ? 'border-emerald-400 shadow-lg shadow-emerald-500/20' : 'border-white/20'
+                                }`}
                             whileHover={{ scale: 1.02 }}
                         >
                             <div className="flex items-center justify-between mb-4">
@@ -139,7 +144,7 @@ const ROICalculator = ({ lang }) => {
                                     <span className="text-lg sm:text-xl font-black">{acres}</span>
                                 </motion.div>
                             </div>
-                            
+
                             <div className="relative">
                                 <input
                                     id="acresRange"
@@ -163,9 +168,8 @@ const ROICalculator = ({ lang }) => {
                                         <button
                                             key={mark}
                                             onClick={() => setAcres(mark)}
-                                            className={`text-xs font-medium transition-all ${
-                                                acres === mark ? 'text-emerald-400 scale-110' : 'text-white/60 hover:text-white'
-                                            }`}
+                                            className={`text-xs font-medium transition-all ${acres === mark ? 'text-emerald-400 scale-110' : 'text-white/60 hover:text-white'
+                                                }`}
                                         >
                                             {mark}
                                         </button>
@@ -245,7 +249,7 @@ const ResultCard = ({ icon, label, value, desc, delay, prefix = '', suffix = '',
         whileHover={{ scale: 1.02, y: -5 }}
         className={`bg-gradient-to-br ${gradient} p-4 sm:p-5 md:p-6 rounded-xl sm:rounded-2xl flex items-center gap-4 shadow-lg border border-white/50 group cursor-pointer`}
     >
-        <motion.div 
+        <motion.div
             className="bg-white p-3 sm:p-4 rounded-xl shadow-md shrink-0 group-hover:shadow-lg transition-shadow"
             whileHover={{ rotate: [0, -10, 10, 0] }}
             transition={{ duration: 0.5 }}

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useCallback } from 'react';
+import React, { useEffect, useMemo, useState, useCallback, memo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from '../utils/i18n';
 
@@ -74,7 +74,7 @@ const HeroSlider = ({ lang }) => {
             await Promise.allSettled(promises);
             setImagesLoaded(true);
         };
-
+        
         // Delay loading other images until first is ready
         const timer = setTimeout(preloadRest, 100);
         return () => clearTimeout(timer);
@@ -116,7 +116,7 @@ const HeroSlider = ({ lang }) => {
     }, []);
 
     // Generate particles - reduced count for performance
-    const particles = useMemo(() =>
+    const particles = useMemo(() => 
         Array.from({ length: 8 }, (_, i) => ({
             id: i,
             delay: i * 0.8,
@@ -124,7 +124,7 @@ const HeroSlider = ({ lang }) => {
             size: 4 + Math.random() * 8,
             left: Math.random() * 100,
         })),
-        []);
+    []);
 
     return (
         <div className="relative h-[55vh] sm:h-[60vh] md:h-[75vh] lg:h-[85vh] w-full overflow-hidden bg-gradient-to-b from-primary-900 to-primary-950">
@@ -143,7 +143,7 @@ const HeroSlider = ({ lang }) => {
             )}
 
             {/* Simplified gradient overlay */}
-            <div
+            <div 
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{
                     background: 'radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,0,0,0.3) 100%)',
@@ -168,7 +168,7 @@ const HeroSlider = ({ lang }) => {
                             fetchPriority={currentSlide === 0 ? "high" : "auto"}
                             decoding="async"
                             className="w-full h-full object-cover will-change-transform"
-                            style={{
+                            style={{ 
                                 objectPosition: 'center 5%',
                                 transform: `translate3d(${mousePosition.x}px, ${mousePosition.y}px, 0) scale(1.05)`,
                             }}
@@ -177,7 +177,7 @@ const HeroSlider = ({ lang }) => {
                 </AnimatePresence>
             </div>
 
-            {/* Content - show immediately with text */}
+            {/* Content */}
             <div className="absolute inset-0 z-20 flex flex-col items-center justify-center text-center px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
                     <AnimatePresence mode="wait">
@@ -188,25 +188,40 @@ const HeroSlider = ({ lang }) => {
                             exit={{ opacity: 0, y: -20 }}
                             transition={{ duration: 0.3 }}
                         >
-                            <h1
-                                className="text-white mb-1 sm:mb-3 md:mb-4 drop-shadow-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase tracking-tight leading-tight"
+                            {/* Title - Montserrat Bold */}
+                            <h1 
+                                className="text-white mb-1 sm:mb-3 md:mb-4 drop-shadow-2xl text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl uppercase tracking-tight leading-tight font-bold"
                                 style={{
+                                    fontFamily: "'Montserrat', sans-serif",
+                                    fontWeight: 700,
                                     textShadow: '0 4px 30px rgba(0,0,0,0.5)',
                                 }}
                             >
                                 {t(current.titleKey)}
                             </h1>
 
-                            <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 mb-4 sm:mb-6 md:mb-8 font-medium tracking-wide max-w-3xl mx-auto leading-relaxed px-2 sm:px-4">
+                            {/* Subtitle - Montserrat SemiBold */}
+                            <p 
+                                className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-white/95 mb-4 sm:mb-6 md:mb-8 tracking-wide max-w-3xl mx-auto leading-relaxed px-2 sm:px-4"
+                                style={{
+                                    fontFamily: "'Montserrat', sans-serif",
+                                    fontWeight: 600,
+                                }}
+                            >
                                 {t(current.subtitleKey)}
                             </p>
                         </motion.div>
                     </AnimatePresence>
 
+                    {/* Button - Montserrat Bold */}
                     <motion.button
                         type="button"
                         onClick={scrollToContact}
-                        className="group relative px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 bg-primary-600 text-white rounded-full text-xs sm:text-sm md:text-base lg:text-lg font-black overflow-hidden shadow-xl uppercase tracking-wider sm:tracking-widest"
+                        className="group relative px-5 py-2.5 sm:px-6 sm:py-3 md:px-8 md:py-3.5 lg:px-10 lg:py-4 bg-primary-600 text-white rounded-full text-xs sm:text-sm md:text-base lg:text-lg overflow-hidden shadow-xl uppercase tracking-wider sm:tracking-widest"
+                        style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontWeight: 700,
+                        }}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >
@@ -214,6 +229,12 @@ const HeroSlider = ({ lang }) => {
                             {t('contactUs')}
                             <span>→</span>
                         </span>
+                        <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-500"
+                            initial={{ x: "-100%" }}
+                            whileHover={{ x: 0 }}
+                            transition={{ duration: 0.3 }}
+                        />
                     </motion.button>
                 </div>
             </div>
@@ -244,4 +265,4 @@ const HeroSlider = ({ lang }) => {
     );
 };
 
-export default HeroSlider;
+export default memo(HeroSlider);
