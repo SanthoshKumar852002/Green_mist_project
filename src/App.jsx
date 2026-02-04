@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Home from './pages/Home';
+
+// Lazy load enhancement components
+const CustomCursor = lazy(() => import('./components/CustomCursor'));
+const ScrollProgress = lazy(() => import('./components/ScrollProgress'));
 
 const translations = {
     en: {
@@ -114,10 +118,20 @@ const translations = {
 
 function App() {
     const [lang, setLang] = useState(() => {
-        // Check localStorage for saved language preference
         const saved = localStorage.getItem('preferredLanguage');
         return saved || 'en';
     });
+    const [isMobile, setIsMobile] = useState(false);
+
+    useEffect(() => {
+        // Check if mobile
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
 
     const handleSelectLang = (newLang) => {
         setLang(newLang);
@@ -125,10 +139,19 @@ function App() {
     };
 
     return (
-        <Home 
-            lang={lang} 
-            onSelectLang={handleSelectLang} 
-        />
+        <>
+            {/* Enhancement Components */}
+            <Suspense fallback={null}>
+                {!isMobile && <CustomCursor />}
+                <ScrollProgress />
+            </Suspense>
+
+            {/* Main App */}
+            <Home
+                lang={lang}
+                onSelectLang={handleSelectLang}
+            />
+        </>
     );
 }
 

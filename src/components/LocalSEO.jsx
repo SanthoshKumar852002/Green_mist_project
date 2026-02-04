@@ -4,7 +4,7 @@ const LocalSEOData = ({ businessInfo }) => {
   // Default business info with correct coordinates
   const defaultBusinessInfo = {
     name: "GREENMIST Agriculture Drone",
-    url: "https://greenmist.in",
+    url: "https://greenmist.net/",
     email: "contact@greenmist.in",
     phones: ["+91 78999 78869", "+91 91503 95864", "+91 90039 92693"],
     images: ["https://greenmist.in/images/og-image.jpg"],

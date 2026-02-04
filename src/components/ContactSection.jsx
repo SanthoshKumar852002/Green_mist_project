@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Toast from "./Toast";
 
-// Floating label input component
+// Floating label input component - UPDATED (removed floating label)
 const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInput, placeholder, value, onChange }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [hasValue, setHasValue] = useState(false);
@@ -32,7 +32,7 @@ const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInp
         type={type}
         required={required}
         onInput={onInput}
-        placeholder={isFocused ? placeholder : ''}
+        placeholder={placeholder}
         onFocus={() => setIsFocused(true)}
         onBlur={(e) => {
           setIsFocused(false);
@@ -42,19 +42,11 @@ const FloatingInput = ({ label, icon: Icon, name, type = "text", required, onInp
           setHasValue(e.target.value.length > 0);
           onChange?.(e);
         }}
-        className={`w-full p-4 rounded-xl bg-white/5 border-2 transition-all duration-300 outline-none font-bold ${isFocused
-          ? 'border-emerald-500 bg-white/10 pl-4'
+        className={`w-full p-4 rounded-xl bg-transparent border-2 transition-all duration-300 outline-none font-bold placeholder:text-white/40 ${isFocused
+          ? 'border-emerald-500 pl-4'
           : 'border-white/10 pl-12 hover:border-white/30'
           }`}
       />
-      <motion.label
-        className={`absolute left-4 transition-all duration-300 font-semibold ${isFocused || hasValue
-          ? '-top-2.5 text-xs bg-primary-700 px-2 text-emerald-400'
-          : 'top-1/2 -translate-y-1/2 text-sm text-transparent'
-          }`}
-      >
-        {label}
-      </motion.label>
       {isFocused && (
         <motion.div
           className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-emerald-500 to-teal-500"
@@ -444,13 +436,13 @@ const ContactSection = ({ lang }) => {
                           name="Name"
                           required
                           onInput={handleNameChange}
-                          placeholder={t("namePlaceholder")}
+                          placeholder={t("namePlaceholder") || "Enter your name"}
                           aria-required="true"
                         />
                       </div>
                       <div className="relative">
                         <label htmlFor="contact-phone" className="sr-only">Phone Number</label>
-                        <div className="flex bg-white/5 border-2 border-white/10 rounded-xl items-center px-4 focus-within:border-emerald-500 focus-within:bg-white/10 transition-all">
+                        <div className="flex bg-transparent border-2 border-white/10 rounded-xl items-center px-4 focus-within:border-emerald-500 transition-all">
                           <Phone className="w-5 h-5 text-emerald-400 mr-2 flex-shrink-0" aria-hidden="true" />
                           <span className="text-emerald-400 font-bold mr-2" aria-label="Country code">+91</span>
                           <input
@@ -461,7 +453,7 @@ const ContactSection = ({ lang }) => {
                             onInput={handlePhoneChange}
                             placeholder="0000000000"
                             pattern="[6-9][0-9]{9}"
-                            className="w-full bg-transparent py-4 outline-none font-bold"
+                            className="w-full bg-transparent py-4 outline-none font-bold placeholder:text-white/40"
                             aria-required="true"
                             itemProp="telephone"
                           />
@@ -477,15 +469,15 @@ const ContactSection = ({ lang }) => {
                         name="Message"
                         rows="3"
                         required
-                        placeholder={t("messagePlaceholder")}
-                        className="w-full p-4 pl-12 rounded-xl bg-white/5 border-2 border-white/10 focus:border-emerald-500 focus:bg-white/10 outline-none font-bold resize-none transition-all"
+                        placeholder={t("messagePlaceholder") || "How can we help you?"}
+                        className="w-full p-4 pl-12 rounded-xl bg-transparent border-2 border-white/10 focus:border-emerald-500 outline-none font-bold resize-none transition-all placeholder:text-white/40"
                         aria-required="true"
                       />
                     </div>
 
                     {/* Captcha */}
                     <motion.div
-                      className="flex flex-col sm:flex-row gap-4 items-center bg-white/5 p-4 rounded-2xl border border-white/10"
+                      className="flex flex-col sm:flex-row gap-4 items-center bg-transparent p-4 rounded-2xl border border-white/10"
                       whileHover={{ borderColor: 'rgba(52, 211, 153, 0.5)' }}
                     >
                       <motion.canvas
@@ -510,7 +502,7 @@ const ContactSection = ({ lang }) => {
                         value={captchaInput}
                         onChange={(e) => setCaptchaInput(e.target.value)}
                         placeholder="CODE"
-                        className="w-full sm:w-32 p-3 rounded-xl bg-white/5 border-2 border-white/10 uppercase font-black text-center tracking-widest focus:border-emerald-500 outline-none transition-all"
+                        className="w-full sm:w-32 p-3 rounded-xl bg-transparent border-2 border-white/10 uppercase font-black text-center tracking-widest focus:border-emerald-500 outline-none transition-all placeholder:text-white/40"
                       />
                     </motion.div>
 
@@ -551,7 +543,7 @@ const ContactSection = ({ lang }) => {
               </motion.div>
             </div>
 
-            {/* Contact Details Cards */}
+            {/* Contact Details Cards - Single Row */}
             <address
               className="grid md:grid-cols-2 gap-4 sm:gap-6 mt-8 sm:mt-12 max-w-4xl mx-auto not-italic"
               itemScope

@@ -12,7 +12,7 @@ const VoiceSearchContent = ({ lang }) => {
     },
     ta: {
       intro: "கிரீன் மிஸ்ட் தமிழ்நாட்டில் தொழில்முறை வேளாண் ட்ரோன் சேவைகளை வழங்குகிறது.",
-      // Add Tamil voice content...
+
     }
   };
 

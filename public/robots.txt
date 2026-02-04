@@ -1,5 +1,5 @@
 # Robots.txt for GREENMIST Agriculture Drone
-# Website: https://greenmist.in
+# Website: https://greenmist.net
 
 User-agent: *
 Allow: /
@@ -14,8 +14,8 @@ Disallow: /private/
 Allow: /images/
 Allow: /assets/
 
-# Sitemap location
-Sitemap: https://greenmist.in/sitemap.xml
+# Sitemap location - UPDATED URL
+Sitemap: https://greenmist.net/sitemap.xml
 
 # Crawl delay for general bots
 Crawl-delay: 1

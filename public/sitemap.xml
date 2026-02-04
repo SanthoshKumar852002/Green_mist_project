@@ -2,389 +2,57 @@
 <!-- filepath: /c:/Users/Hello/OneDrive/Desktop/green_mist2/green_mist/greenmist/public/sitemap.xml -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
-        xmlns:geo="http://www.google.com/geo/schemas/sitemap/1.0">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   
   <!-- Homepage - English -->
   <url>
-    <loc>https://greenmist.in/</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.in/"/>
+    <loc>https://greenmist.net/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.net/"/>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.net/ta"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.net/"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://greenmist.in/images/og-image.jpg</image:loc>
+      <image:loc>https://greenmist.net/images/og-image.jpg</image:loc>
       <image:title>GREENMIST Agriculture Drone Services</image:title>
       <image:caption>Professional agricultural drone services in Tamil Nadu</image:caption>
     </image:image>
-    <geo:geo>
-      <geo:format>kml</geo:format>
-    </geo:geo>
   </url>
 
   <!-- Homepage - Tamil -->
   <url>
-    <loc>https://greenmist.in/ta</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.in/"/>
+    <loc>https://greenmist.net/ta</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.net/"/>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.net/ta"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.net/"/>
     <lastmod>2026-02-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/og-image.jpg</image:loc>
-      <image:title>கிரீன்மிஸ்ட் வேளாண் ட்ரோன் சேவைகள்</image:title>
-      <image:caption>தமிழ்நாட்டில் தொழில்முறை வேளாண் ட்ரோன் சேவைகள்</image:caption>
-    </image:image>
   </url>
 
-  <!-- About Section - English -->
+  <!-- About Section -->
   <url>
-    <loc>https://greenmist.in/#about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#about"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#about"/>
+    <loc>https://greenmist.net/#about</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- About Section - Tamil -->
+  <!-- Services Section -->
   <url>
-    <loc>https://greenmist.in/ta#about</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#about"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#about"/>
+    <loc>https://greenmist.net/#services</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Services Section - English -->
+  <!-- Contact Section -->
   <url>
-    <loc>https://greenmist.in/#services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#services"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#services"/>
+    <loc>https://greenmist.net/#contact</loc>
     <lastmod>2026-02-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/drone-spraying.jpg</image:loc>
-      <image:title>Drone Crop Spraying Service</image:title>
-      <image:caption>Precision drone spraying for pesticides and fertilizers</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://greenmist.in/images/crop-monitoring.jpg</image:loc>
-      <image:title>Crop Health Monitoring</image:title>
-      <image:caption>Aerial crop health assessment using advanced imaging</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://greenmist.in/images/field-mapping.jpg</image:loc>
-      <image:title>Field Mapping Services</image:title>
-      <image:caption>High-resolution aerial land survey and mapping</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Services Section - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta#services</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#services"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#services"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/drone-spraying.jpg</image:loc>
-      <image:title>ட்ரோன் பயிர் தெளிப்பு சேவை</image:title>
-      <image:caption>பூச்சிக்கொல்லிகள் மற்றும் உரங்களுக்கான துல்லிய ட்ரோன் தெளிப்பு</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Contact Section - English -->
-  <url>
-    <loc>https://greenmist.in/#contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#contact"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#contact"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Contact Section - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta#contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/#contact"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta#contact"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Service: Crop Spraying - English -->
-  <url>
-    <loc>https://greenmist.in/services/crop-spraying</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/crop-spraying"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/crop-spraying"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/services/crop-spraying-detail.jpg</image:loc>
-      <image:title>Professional Crop Spraying with Drones</image:title>
-      <image:caption>GPS-guided precision spraying covering 50+ acres per day</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Service: Crop Spraying - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/services/crop-spraying</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/crop-spraying"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/crop-spraying"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Service: Crop Health Monitoring - English -->
-  <url>
-    <loc>https://greenmist.in/services/crop-monitoring</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/crop-monitoring"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/crop-monitoring"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/services/crop-monitoring-detail.jpg</image:loc>
-      <image:title>Aerial Crop Health Assessment</image:title>
-      <image:caption>Early disease detection using multispectral imaging</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Service: Crop Health Monitoring - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/services/crop-monitoring</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/crop-monitoring"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/crop-monitoring"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Service: Field Mapping - English -->
-  <url>
-    <loc>https://greenmist.in/services/field-mapping</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/field-mapping"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/field-mapping"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://greenmist.in/images/services/field-mapping-detail.jpg</image:loc>
-      <image:title>Agricultural Field Mapping</image:title>
-      <image:caption>High-resolution 3D terrain models for farm planning</image:caption>
-    </image:image>
-  </url>
-
-  <!-- Service: Field Mapping - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/services/field-mapping</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/field-mapping"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/field-mapping"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Service: Pest Control - English -->
-  <url>
-    <loc>https://greenmist.in/services/pest-control</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/pest-control"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/pest-control"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Service: Pest Control - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/services/pest-control</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/services/pest-control"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/services/pest-control"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Location Pages - Service Areas -->
-  
-  <!-- Tiruchengode -->
-  <url>
-    <loc>https://greenmist.in/locations/tiruchengode</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/tiruchengode"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/tiruchengode"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Namakkal -->
-  <url>
-    <loc>https://greenmist.in/locations/namakkal</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/namakkal"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/namakkal"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Salem -->
-  <url>
-    <loc>https://greenmist.in/locations/salem</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/salem"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/salem"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Erode -->
-  <url>
-    <loc>https://greenmist.in/locations/erode</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/erode"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/erode"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Karur -->
-  <url>
-    <loc>https://greenmist.in/locations/karur</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/karur"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/karur"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Coimbatore -->
-  <url>
-    <loc>https://greenmist.in/locations/coimbatore</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/coimbatore"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/coimbatore"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Madurai -->
-  <url>
-    <loc>https://greenmist.in/locations/madurai</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/madurai"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/madurai"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Tiruchirappalli -->
-  <url>
-    <loc>https://greenmist.in/locations/tiruchirappalli</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/tiruchirappalli"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/tiruchirappalli"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Dindigul -->
-  <url>
-    <loc>https://greenmist.in/locations/dindigul</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/dindigul"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/dindigul"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Thanjavur -->
-  <url>
-    <loc>https://greenmist.in/locations/thanjavur</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/thanjavur"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/thanjavur"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Chennai -->
-  <url>
-    <loc>https://greenmist.in/locations/chennai</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/chennai"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/chennai"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Vellore -->
-  <url>
-    <loc>https://greenmist.in/locations/vellore</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/vellore"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/vellore"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Tirunelveli -->
-  <url>
-    <loc>https://greenmist.in/locations/tirunelveli</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/locations/tirunelveli"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/locations/tirunelveli"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- FAQ Page -->
-  <url>
-    <loc>https://greenmist.in/faq</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/faq"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/faq"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- FAQ Page - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/faq</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/faq"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/faq"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
-  <!-- Pricing Page -->
-  <url>
-    <loc>https://greenmist.in/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/pricing"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/pricing"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <!-- Pricing Page - Tamil -->
-  <url>
-    <loc>https://greenmist.in/ta/pricing</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.in/pricing"/>
-    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.in/ta/pricing"/>
-    <lastmod>2026-02-04</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
   </url>
 
 </urlset>

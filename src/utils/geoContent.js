@@ -80,7 +80,7 @@ export const geoOptimizedContent = {
     { type: "Phone", value: "+91 91503 95864" },
     { type: "Phone", value: "+91 90039 92693" },
     { type: "WhatsApp", value: "+91 78999 78869" },
-    { type: "Website", value: "https://greenmist.in" }
+    { type: "Website", value: "https://greenmist.net" }  // ← UPDATED
   ]
 };
 

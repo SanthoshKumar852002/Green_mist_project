@@ -17,13 +17,45 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
     useEffect(() => {
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden';
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${window.scrollY}px`;
+            document.body.style.width = '100%';
         } else {
-            document.body.style.overflow = 'unset';
+            const scrollY = document.body.style.top;
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
         }
         return () => {
-            document.body.style.overflow = 'unset';
+            document.body.style.overflow = '';
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.width = '';
         };
     }, [isMenuOpen]);
+
+    useEffect(() => {
+        const handleEscape = (e) => {
+            if (e.key === 'Escape') {
+                setIsMenuOpen(false);
+            }
+        };
+        window.addEventListener('keydown', handleEscape);
+        return () => window.removeEventListener('keydown', handleEscape);
+    }, []);
+
+    const handleNavClick = (e, href) => {
+        e.preventDefault();
+        setIsMenuOpen(false);
+        setTimeout(() => {
+            const element = document.querySelector(href);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 300);
+    };
 
     const greenLetters = "GREEN".split("");
     const mistLetters = "MIST".split("");
@@ -101,272 +133,301 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
     };
 
     return (
-        <motion.nav 
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-                scrolled 
-                    ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-emerald-500/5' 
-                    : 'bg-white shadow-md'
-            }`}
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ type: "spring", stiffness: 100, damping: 20 }}
-        >
-            {/* Animated border gradient */}
-            <motion.div 
-                className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
-                initial={{ opacity: 0, scaleX: 0 }}
-                animate={{ opacity: scrolled ? 1 : 0, scaleX: scrolled ? 1 : 0 }}
-                transition={{ duration: 0.5 }}
-            />
+        <>
+            <motion.nav 
+                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+                    scrolled 
+                        ? 'bg-white/90 backdrop-blur-xl shadow-lg shadow-emerald-500/5' 
+                        : 'bg-white shadow-md'
+                }`}
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            >
+                <motion.div 
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-emerald-500 to-transparent"
+                    initial={{ opacity: 0, scaleX: 0 }}
+                    animate={{ opacity: scrolled ? 1 : 0, scaleX: scrolled ? 1 : 0 }}
+                    transition={{ duration: 0.5 }}
+                />
 
-            <div className="container mx-auto px-4 py-3">
-                <div className="flex items-center justify-between">
-                    {/* Logo - Left */}
-                    <div className="flex items-center gap-4">
-                        <motion.div
-                            className="relative"
-                            whileHover={{ scale: 1.1 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <motion.img
-                                src="/images/logo_round.png"
-                                alt="Logo"
-                                className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-emerald-100 shadow-sm relative z-10"
-                            />
-                            {/* Pulse ring effect */}
+                <div className="container mx-auto px-4 py-3">
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-4">
                             <motion.div
-                                className="absolute inset-0 rounded-full border-2 border-emerald-400"
-                                animate={{
-                                    scale: [1, 1.3, 1],
-                                    opacity: [0.5, 0, 0.5],
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                            />
-                        </motion.div>
-
-                        {/* GREENMIST TITLE */}
-                        <motion.div
-                            className="flex items-center cursor-pointer relative"
-                            onHoverStart={() => setIsLogoHovered(true)}
-                            onHoverEnd={() => setIsLogoHovered(false)}
-                            initial="rest"
-                            animate={isLogoHovered ? "hover" : "rest"}
-                        >
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-green-400/30 via-emerald-300/30 to-teal-400/30 blur-xl rounded-full"
-                                variants={glowVariants}
-                            />
-                            
-                            <div className="flex">
-                                {greenLetters.map((letter, i) => (
-                                    <motion.span
-                                        key={`green-${i}`}
-                                        custom={i}
-                                        variants={letterVariants}
-                                        className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
-                                        style={{
-                                            background: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
-                                            WebkitBackgroundClip: 'text',
-                                            WebkitTextFillColor: 'transparent',
-                                            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
-                                        }}
-                                    >
-                                        {letter}
-                                    </motion.span>
-                                ))}
-                            </div>
-                            
-                            <div className="flex">
-                                {mistLetters.map((letter, i) => (
-                                    <motion.span
-                                        key={`mist-${i}`}
-                                        custom={i + 5}
-                                        variants={letterVariants}
-                                        className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
-                                        style={{
-                                            background: 'linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%)',
-                                            WebkitBackgroundClip: 'text',
-                                            WebkitTextFillColor: 'transparent',
-                                            filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
-                                        }}
-                                    >
-                                        {letter}
-                                    </motion.span>
-                                ))}
-                            </div>
-
-                            <AnimatePresence>
-                                {isLogoHovered && (
-                                    <>
-                                        <motion.span
-                                            className="absolute -top-1 -right-1 text-yellow-400 text-xs"
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], rotate: 360 }}
-                                            exit={{ opacity: 0, scale: 0 }}
-                                            transition={{ duration: 1, repeat: Infinity }}
-                                        >
-                                            ✦
-                                        </motion.span>
-                                        <motion.span
-                                            className="absolute -bottom-1 left-4 text-emerald-400 text-xs"
-                                            initial={{ opacity: 0, scale: 0 }}
-                                            animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
-                                            exit={{ opacity: 0, scale: 0 }}
-                                            transition={{ duration: 1, delay: 0.3, repeat: Infinity }}
-                                        >
-                                            ✦
-                                        </motion.span>
-                                    </>
-                                )}
-                            </AnimatePresence>
-                        </motion.div>
-                    </div>
-
-                    {/* Navigation Links - Center */}
-                    <div className="hidden md:flex items-center justify-center flex-1 gap-8">
-                        <NavLink href="#home" index={0}>{t('navHome')}</NavLink>
-                        <NavLink href="#about" index={1}>{t('navAbout')}</NavLink>
-                        <NavLink href="#services" index={2}>{t('navServices')}</NavLink>
-                    </div>
-
-                    {/* Right Side */}
-                    <div className="hidden md:flex items-center gap-4">
-                        {/* Language Switcher with animation */}
-                        <motion.div 
-                            className="flex items-center bg-gray-100 rounded-full p-1 relative overflow-hidden"
-                            whileHover={{ scale: 1.02 }}
-                        >
-                            <motion.div
-                                className="absolute inset-y-1 bg-primary-600 rounded-full"
-                                animate={{
-                                    left: currentLang === 'en' ? 4 : 'calc(50% + 2px)',
-                                    width: 'calc(50% - 6px)'
-                                }}
-                                transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                            />
-                            <button
-                                onClick={() => onSelectLang('en')}
-                                className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[50px] ${
-                                    currentLang === 'en' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
-                                }`}
+                                className="relative"
+                                whileHover={{ scale: 1.1 }}
+                                whileTap={{ scale: 0.95 }}
                             >
-                                EN
-                            </button>
-                            <button
-                                onClick={() => onSelectLang('ta')}
-                                className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[70px] whitespace-nowrap ${
-                                    currentLang === 'ta' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
-                                }`}
-                            >
-                                தமிழ்
-                            </button>
-                        </motion.div>
+                                <motion.img
+                                    src="/images/logo_round.png"
+                                    alt="Logo"
+                                    className="h-10 w-10 md:h-12 md:w-12 rounded-full border-2 border-emerald-100 shadow-sm relative z-10"
+                                />
+                                <motion.div
+                                    className="absolute inset-0 rounded-full border-2 border-emerald-400"
+                                    animate={{
+                                        scale: [1, 1.3, 1],
+                                        opacity: [0.5, 0, 0.5],
+                                    }}
+                                    transition={{
+                                        duration: 2,
+                                        repeat: Infinity,
+                                        ease: "easeInOut"
+                                    }}
+                                />
+                            </motion.div>
 
-                        {/* Contact Button */}
-                        <motion.a
-                            href="#contact"
-                            className="relative bg-primary-600 text-white px-6 py-2.5 rounded-full font-bold overflow-hidden group"
-                            whileHover={{ scale: 1.05 }}
-                            whileTap={{ scale: 0.95 }}
-                        >
-                            <span className="relative z-10">{t('contactUs')}</span>
                             <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-500"
-                                initial={{ x: "-100%" }}
-                                whileHover={{ x: 0 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </motion.a>
-                    </div>
+                                className="flex items-center cursor-pointer relative"
+                                onHoverStart={() => setIsLogoHovered(true)}
+                                onHoverEnd={() => setIsLogoHovered(false)}
+                                initial="rest"
+                                animate={isLogoHovered ? "hover" : "rest"}
+                            >
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-green-400/30 via-emerald-300/30 to-teal-400/30 blur-xl rounded-full"
+                                    variants={glowVariants}
+                                />
+                                
+                                <div className="flex">
+                                    {greenLetters.map((letter, i) => (
+                                        <motion.span
+                                            key={`green-${i}`}
+                                            custom={i}
+                                            variants={letterVariants}
+                                            className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
+                                            style={{
+                                                background: 'linear-gradient(135deg, #059669 0%, #10b981 50%, #34d399 100%)',
+                                                WebkitBackgroundClip: 'text',
+                                                WebkitTextFillColor: 'transparent',
+                                                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                                            }}
+                                        >
+                                            {letter}
+                                        </motion.span>
+                                    ))}
+                                </div>
+                                
+                                <div className="flex">
+                                    {mistLetters.map((letter, i) => (
+                                        <motion.span
+                                            key={`mist-${i}`}
+                                            custom={i + 5}
+                                            variants={letterVariants}
+                                            className="font-['Syne'] text-2xl md:text-3xl lg:text-4xl font-black tracking-tight inline-block"
+                                            style={{
+                                                background: 'linear-gradient(135deg, #0d9488 0%, #14b8a6 50%, #5eead4 100%)',
+                                                WebkitBackgroundClip: 'text',
+                                                WebkitTextFillColor: 'transparent',
+                                                filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1))'
+                                            }}
+                                        >
+                                            {letter}
+                                        </motion.span>
+                                    ))}
+                                </div>
 
-                    {/* Mobile Menu Button */}
-                    <motion.button
-                        className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        whileTap={{ scale: 0.9 }}
-                    >
-                        <div className="w-6 h-5 flex flex-col justify-between">
-                            <motion.span
-                                className="w-full h-0.5 bg-gray-700 rounded-full origin-left"
-                                animate={isMenuOpen ? { rotate: 45, y: -2 } : { rotate: 0, y: 0 }}
-                            />
-                            <motion.span
-                                className="w-full h-0.5 bg-gray-700 rounded-full"
-                                animate={isMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
-                            />
-                            <motion.span
-                                className="w-full h-0.5 bg-gray-700 rounded-full origin-left"
-                                animate={isMenuOpen ? { rotate: -45, y: 2 } : { rotate: 0, y: 0 }}
-                            />
+                                <AnimatePresence>
+                                    {isLogoHovered && (
+                                        <>
+                                            <motion.span
+                                                className="absolute -top-1 -right-1 text-yellow-400 text-xs"
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={{ opacity: [0, 1, 0], scale: [0, 1, 0], rotate: 360 }}
+                                                exit={{ opacity: 0, scale: 0 }}
+                                                transition={{ duration: 1, repeat: Infinity }}
+                                            >
+                                                ✦
+                                            </motion.span>
+                                            <motion.span
+                                                className="absolute -bottom-1 left-4 text-emerald-400 text-xs"
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={{ opacity: [0, 1, 0], scale: [0, 1, 0] }}
+                                                exit={{ opacity: 0, scale: 0 }}
+                                                transition={{ duration: 1, delay: 0.3, repeat: Infinity }}
+                                            >
+                                                ✦
+                                            </motion.span>
+                                        </>
+                                    )}
+                                </AnimatePresence>
+                            </motion.div>
                         </div>
-                    </motion.button>
-                </div>
 
-                {/* Mobile Menu */}
-                <AnimatePresence>
-                    {isMenuOpen && (
-                        <motion.div 
-                            className="md:hidden overflow-hidden"
-                            variants={mobileMenuVariants}
-                            initial="closed"
-                            animate="open"
-                            exit="closed"
-                        >
-                            <div className="mt-4 pb-4 border-t border-gray-100 pt-4 space-y-2">
-                                {[
-                                    { href: '#home', label: t('navHome') },
-                                    { href: '#about', label: t('navAbout') },
-                                    { href: '#services', label: t('navServices') },
-                                    { href: '#contact', label: t('contactUs') },
-                                ].map((item, i) => (
-                                    <motion.a
-                                        key={item.href}
-                                        href={item.href}
-                                        variants={mobileItemVariants}
-                                        className="block text-lg font-semibold text-gray-700 hover:text-primary-600 py-3 px-4 rounded-xl hover:bg-emerald-50 transition-colors"
-                                        onClick={() => setIsMenuOpen(false)}
-                                        whileTap={{ scale: 0.98 }}
-                                    >
-                                        {item.label}
-                                    </motion.a>
-                                ))}
+                        <div className="hidden md:flex items-center justify-center flex-1 gap-8">
+                            <NavLink href="#home" index={0}>{t('navHome')}</NavLink>
+                            <NavLink href="#about" index={1}>{t('navAbout')}</NavLink>
+                            <NavLink href="#services" index={2}>{t('navServices')}</NavLink>
+                        </div>
 
-                                {/* Mobile Language Switcher */}
-                                <motion.div 
-                                    variants={mobileItemVariants}
-                                    className="flex gap-3 pt-4 border-t border-gray-100 mt-4"
+                        <div className="hidden md:flex items-center gap-4">
+                            <motion.div 
+                                className="flex items-center bg-gray-100 rounded-full p-1 relative overflow-hidden"
+                                whileHover={{ scale: 1.02 }}
+                            >
+                                <motion.div
+                                    className="absolute inset-y-1 bg-primary-600 rounded-full"
+                                    animate={{
+                                        left: currentLang === 'en' ? 4 : 'calc(50% + 2px)',
+                                        width: 'calc(50% - 6px)'
+                                    }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                />
+                                <button
+                                    onClick={() => onSelectLang('en')}
+                                    className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[50px] ${
+                                        currentLang === 'en' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
+                                    }`}
                                 >
-                                    <button
-                                        onClick={() => { onSelectLang('en'); setIsMenuOpen(false); }}
-                                        className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all ${
-                                            currentLang === 'en'
-                                                ? 'bg-primary-600 text-white shadow-lg shadow-emerald-500/30'
-                                                : 'bg-gray-100 text-gray-600'
-                                        }`}
-                                    >
-                                        English
-                                    </button>
-                                    <button
-                                        onClick={() => { onSelectLang('ta'); setIsMenuOpen(false); }}
-                                        className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all ${
-                                            currentLang === 'ta'
-                                                ? 'bg-primary-600 text-white shadow-lg shadow-emerald-500/30'
-                                                : 'bg-gray-100 text-gray-600'
-                                        }`}
-                                    >
-                                        தமிழ்
-                                    </button>
-                                </motion.div>
+                                    EN
+                                </button>
+                                <button
+                                    onClick={() => onSelectLang('ta')}
+                                    className={`px-5 py-1.5 rounded-full text-sm font-bold transition-colors duration-300 relative z-10 min-w-[70px] whitespace-nowrap ${
+                                        currentLang === 'ta' ? 'text-white' : 'text-gray-600 hover:text-gray-800'
+                                    }`}
+                                >
+                                    தமிழ்
+                                </button>
+                            </motion.div>
+
+                            <motion.a
+                                href="#contact"
+                                className="relative bg-primary-600 text-white px-6 py-2.5 rounded-full font-bold overflow-hidden group"
+                                whileHover={{ scale: 1.05 }}
+                                whileTap={{ scale: 0.95 }}
+                            >
+                                <span className="relative z-10">{t('contactUs')}</span>
+                                <motion.div
+                                    className="absolute inset-0 bg-gradient-to-r from-emerald-600 to-teal-500"
+                                    initial={{ x: "-100%" }}
+                                    whileHover={{ x: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                />
+                            </motion.a>
+                        </div>
+
+                        <motion.button
+                            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
+                            onClick={() => setIsMenuOpen(!isMenuOpen)}
+                            whileTap={{ scale: 0.9 }}
+                            aria-label="Toggle menu"
+                            aria-expanded={isMenuOpen}
+                        >
+                            <div className="w-6 h-5 flex flex-col justify-between">
+                                <motion.span
+                                    className="w-full h-0.5 bg-gray-700 rounded-full origin-left"
+                                    animate={isMenuOpen ? { rotate: 45, y: -2 } : { rotate: 0, y: 0 }}
+                                />
+                                <motion.span
+                                    className="w-full h-0.5 bg-gray-700 rounded-full"
+                                    animate={isMenuOpen ? { opacity: 0, x: -20 } : { opacity: 1, x: 0 }}
+                                />
+                                <motion.span
+                                    className="w-full h-0.5 bg-gray-700 rounded-full origin-left"
+                                    animate={isMenuOpen ? { rotate: -45, y: 2 } : { rotate: 0, y: 0 }}
+                                />
                             </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-        </motion.nav>
+                        </motion.button>
+                    </div>
+
+                    <AnimatePresence>
+                        {isMenuOpen && (
+                            <>
+                                <motion.div
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+                                    onClick={() => setIsMenuOpen(false)}
+                                    aria-hidden="true"
+                                />
+
+                                <motion.div
+                                    initial={{ x: '100%' }}
+                                    animate={{ x: 0 }}
+                                    exit={{ x: '100%' }}
+                                    transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+                                    className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-50 lg:hidden shadow-2xl overflow-y-auto"
+                                >
+                                    <div className="flex justify-end p-4">
+                                        <button
+                                            onClick={() => setIsMenuOpen(false)}
+                                            className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                                            aria-label="Close menu"
+                                        >
+                                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <div className="px-6 py-4 space-y-2">
+                                        {[
+                                            { href: '#home', label: t('navHome') },
+                                            { href: '#about', label: t('navAbout') },
+                                            { href: '#services', label: t('navServices') },
+                                            { href: '#contact', label: t('contactUs') },
+                                        ].map((item, i) => (
+                                            <motion.a
+                                                key={item.href}
+                                                href={item.href}
+                                                onClick={(e) => handleNavClick(e, item.href)}
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                transition={{ delay: i * 0.1 }}
+                                                className="block py-4 px-4 text-lg font-bold text-gray-800 hover:text-emerald-600 hover:bg-emerald-50 rounded-xl transition-all"
+                                            >
+                                                {item.label}
+                                            </motion.a>
+                                        ))}
+                                    </div>
+
+                                    <div className="px-6 py-4 border-t border-gray-100">
+                                        <motion.div 
+                                            className="flex gap-3 pt-4 border-t border-gray-100 mt-4"
+                                        >
+                                            <button
+                                                onClick={() => { onSelectLang('en'); setIsMenuOpen(false); }}
+                                                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all ${
+                                                    currentLang === 'en'
+                                                        ? 'bg-primary-600 text-white shadow-lg shadow-emerald-500/30'
+                                                        : 'bg-gray-100 text-gray-600'
+                                                }`}
+                                            >
+                                                English
+                                            </button>
+                                            <button
+                                                onClick={() => { onSelectLang('ta'); setIsMenuOpen(false); }}
+                                                className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all ${
+                                                    currentLang === 'ta'
+                                                        ? 'bg-primary-600 text-white shadow-lg shadow-emerald-500/30'
+                                                        : 'bg-gray-100 text-gray-600'
+                                                }`}
+                                            >
+                                                தமிழ்
+                                            </button>
+                                        </motion.div>
+                                    </div>
+
+                                    <div className="px-6 py-4 mt-auto border-t border-gray-100">
+                                        <a
+                                            href="tel:+917899978869"
+                                            className="flex items-center gap-3 py-3 text-emerald-600 font-bold"
+                                        >
+                                            <span>📞</span>
+                                            +91 78999 78869
+                                        </a>
+                                    </div>
+                                </motion.div>
+                            </>
+                        )}
+                    </AnimatePresence>
+                </div>
+            </motion.nav>
+        </>
     );
 };
 
