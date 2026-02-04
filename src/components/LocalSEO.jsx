@@ -1,58 +1,82 @@
 import React from 'react';
 
-// Component to add local business structured data
 const LocalSEOData = ({ businessInfo }) => {
+  // Default business info with correct coordinates
+  const defaultBusinessInfo = {
+    name: "GREENMIST Agriculture Drone",
+    url: "https://greenmist.in",
+    email: "contact@greenmist.in",
+    phones: ["+91 78999 78869", "+91 91503 95864", "+91 90039 92693"],
+    images: ["https://greenmist.in/images/og-image.jpg"],
+    priceRange: "₹₹",
+    address: {
+      street: "Manickampalayam",
+      city: "Tiruchengode",
+      state: "Tamil Nadu",
+      postalCode: "637202",
+      country: "IN"
+    },
+    geo: {
+      lat: 11.3269331,
+      lng: 78.00271943
+    },
+    hours: [
+      {
+        days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        opens: "06:00",
+        closes: "18:00"
+      }
+    ],
+    serviceAreas: [
+      "Tiruchengode", "Namakkal", "Salem", "Erode", "Karur",
+      "Coimbatore", "Madurai", "Tiruchirappalli", "Dindigul",
+      "Thanjavur", "Chennai", "Vellore", "Tirunelveli",
+      "Cuddalore", "Kanchipuram"
+    ],
+    rating: { value: 4.8, count: 127 },
+    reviews: []
+  };
+
+  const info = businessInfo || defaultBusinessInfo;
+
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": `${businessInfo.url}#localbusiness`,
-    "name": businessInfo.name,
-    "image": businessInfo.images,
-    "telephone": businessInfo.phones[0],
-    "email": businessInfo.email,
-    "url": businessInfo.url,
-    "priceRange": businessInfo.priceRange,
+    "@id": `${info.url}#localbusiness`,
+    "name": info.name,
+    "image": info.images,
+    "telephone": info.phones[0],
+    "email": info.email,
+    "url": info.url,
+    "priceRange": info.priceRange,
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": businessInfo.address.street,
-      "addressLocality": businessInfo.address.city,
-      "addressRegion": businessInfo.address.state,
-      "postalCode": businessInfo.address.postalCode,
-      "addressCountry": businessInfo.address.country
+      "streetAddress": info.address.street,
+      "addressLocality": info.address.city,
+      "addressRegion": info.address.state,
+      "postalCode": info.address.postalCode,
+      "addressCountry": info.address.country
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": businessInfo.geo.lat,
-      "longitude": businessInfo.geo.lng
+      "latitude": info.geo.lat,
+      "longitude": info.geo.lng
     },
-    "openingHoursSpecification": businessInfo.hours.map(h => ({
+    "openingHoursSpecification": info.hours.map(h => ({
       "@type": "OpeningHoursSpecification",
       "dayOfWeek": h.days,
       "opens": h.opens,
       "closes": h.closes
     })),
-    "areaServed": businessInfo.serviceAreas.map(area => ({
+    "areaServed": info.serviceAreas.map(area => ({
       "@type": "City",
       "name": area
     })),
-    "aggregateRating": businessInfo.rating ? {
+    "aggregateRating": info.rating ? {
       "@type": "AggregateRating",
-      "ratingValue": businessInfo.rating.value,
-      "reviewCount": businessInfo.rating.count
-    } : undefined,
-    "review": businessInfo.reviews?.map(review => ({
-      "@type": "Review",
-      "author": {
-        "@type": "Person",
-        "name": review.author
-      },
-      "reviewRating": {
-        "@type": "Rating",
-        "ratingValue": review.rating
-      },
-      "reviewBody": review.text,
-      "datePublished": review.date
-    }))
+      "ratingValue": info.rating.value,
+      "reviewCount": info.rating.count
+    } : undefined
   };
 
   return (
@@ -63,8 +87,21 @@ const LocalSEOData = ({ businessInfo }) => {
   );
 };
 
-// Service Area Schema
+// Service Area Schema with correct coordinates
 export const ServiceAreaSchema = ({ areas }) => {
+  const defaultAreas = [
+    { name: "Tiruchengode", state: "Tamil Nadu" },
+    { name: "Namakkal", state: "Tamil Nadu" },
+    { name: "Salem", state: "Tamil Nadu" },
+    { name: "Erode", state: "Tamil Nadu" },
+    { name: "Karur", state: "Tamil Nadu" },
+    { name: "Coimbatore", state: "Tamil Nadu" },
+    { name: "Madurai", state: "Tamil Nadu" },
+    { name: "Tiruchirappalli", state: "Tamil Nadu" }
+  ];
+
+  const serviceAreas = areas || defaultAreas;
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -79,9 +116,14 @@ export const ServiceAreaSchema = ({ areas }) => {
         "addressRegion": "Tamil Nadu",
         "postalCode": "637202",
         "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 11.3269331,
+        "longitude": 78.00271943
       }
     },
-    "areaServed": areas.map(area => ({
+    "areaServed": serviceAreas.map(area => ({
       "@type": "City",
       "name": area.name,
       "containedInPlace": {

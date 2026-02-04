@@ -13,54 +13,46 @@ const HomeContent = React.lazy(() => import('./HomeContent'));
 const Home = ({ lang, onSelectLang }) => {
     const { t } = useTranslation(lang);
 
+    // SEO location data with correct coordinates
+    const seoLocation = {
+        region: "IN-TN",
+        placename: "Tiruchengode, Tamil Nadu, India",
+        position: "11.3269331;78.00271943"
+    };
+
     // Business info for LocalSEO component
     const businessInfo = {
-        name: lang === 'ta' ? "கிரீன்மிஸ்ட் வேளாண் ட்ரோன்கள்" : "GREENMIST Agriculture Drone",
+        name: "GREENMIST Agriculture Drone",
         url: "https://greenmist.in",
         email: "contact@greenmist.in",
         priceRange: "₹₹",
         images: [
-            "https://greenmist.in/images/drone-spraying.jpg",
-            "https://greenmist.in/images/team.jpg"
+            "https://greenmist.in/images/og-image.jpg"
         ],
         phones: ["+91 78999 78869", "+91 91503 95864", "+91 90039 92693"],
         address: {
-            street: lang === 'ta' ? "மணிக்கம்பாளையம்" : "Manickampalayam",
-            city: lang === 'ta' ? "திருச்செங்கோடு" : "Tiruchengode",
-            state: lang === 'ta' ? "தமிழ்நாடு" : "Tamil Nadu",
+            street: "Manickampalayam",
+            city: "Tiruchengode",
+            state: "Tamil Nadu",
             postalCode: "637202",
             country: "IN"
         },
         geo: {
-            lat: 11.3781,
-            lng: 77.8942
+            lat: 11.3269331,
+            lng: 78.00271943
         },
         hours: [
             { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "06:00", closes: "18:00" }
         ],
         serviceAreas: [
             "Tiruchengode", "Namakkal", "Salem", "Erode", "Karur",
-            "Coimbatore", "Madurai", "Tiruchirappalli", "Dindigul", "Thanjavur",
-            "Chennai", "Vellore", "Tirunelveli", "Cuddalore", "Kanchipuram"
+            "Coimbatore", "Madurai", "Tiruchirappalli", "Dindigul",
+            "Thanjavur", "Chennai", "Vellore", "Tirunelveli"
         ],
         rating: {
             value: 4.8,
             count: 127
-        },
-        reviews: [
-            {
-                author: "Rajan Kumar",
-                rating: 5,
-                text: "Excellent drone spraying service. Covered my 20 acre farm in just 4 hours!",
-                date: "2024-12-15"
-            },
-            {
-                author: "Muthu Selvam",
-                rating: 5,
-                text: "Very professional team. Reduced my pesticide costs significantly.",
-                date: "2024-11-20"
-            }
-        ]
+        }
     };
 
     // Service areas for ServiceAreaSchema
@@ -152,18 +144,17 @@ const Home = ({ lang, onSelectLang }) => {
 
             {/* 1. Meta tags, OG tags, Twitter cards */}
             <SEOHead
-                title={currentSEO.title}
-                description={currentSEO.description}
-                keywords={currentSEO.keywords}
-                canonicalUrl={`https://greenmist.in/${lang}`}
+                title={lang === 'ta' 
+                    ? "கிரீன் மிஸ்ட் - வேளாண் ட்ரோன் சேவைகள்" 
+                    : "Green Mist - Agricultural Drone Services"
+                }
+                description="Professional agricultural drone services in Tamil Nadu"
+                keywords="drone spraying, agriculture, Tamil Nadu"
+                canonicalUrl="https://greenmist.in"
                 ogImage="https://greenmist.in/images/og-image.jpg"
                 lang={lang}
                 structuredData={combinedSchema}
-                location={{
-                    region: "IN-TN",
-                    placename: "Tamil Nadu, India",
-                    position: "13.0827;80.2707"
-                }}
+                location={seoLocation}
             />
 
             {/* 2. Local Business Schema (separate for Google My Business) */}

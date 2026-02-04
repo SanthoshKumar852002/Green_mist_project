@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
 
-const SEOHead = ({ 
-  title, 
-  description, 
-  keywords, 
-  canonicalUrl, 
+const SEOHead = ({
+  title,
+  description,
+  keywords,
+  canonicalUrl,
   ogImage,
   lang = 'en',
   structuredData,
-  location 
+  location
 }) => {
   useEffect(() => {
     // Title
@@ -48,13 +48,19 @@ const SEOHead = ({
     setMeta('twitter:description', description);
     setMeta('twitter:image', ogImage);
 
-    // Geo Tags for Local SEO
-    if (location) {
-      setMeta('geo.region', location.region);
-      setMeta('geo.placename', location.placename);
-      setMeta('geo.position', location.position);
-      setMeta('ICBM', location.position);
-    }
+    // Geo Tags for Local SEO - Use passed location or default
+    const defaultLocation = {
+      region: "IN-TN",
+      placename: "Tiruchengode, Tamil Nadu, India",
+      position: "11.3269331;78.00271943"
+    };
+
+    const geoLocation = location || defaultLocation;
+
+    setMeta('geo.region', geoLocation.region);
+    setMeta('geo.placename', geoLocation.placename);
+    setMeta('geo.position', geoLocation.position);
+    setMeta('ICBM', geoLocation.position.replace(';', ', '));
 
     // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');

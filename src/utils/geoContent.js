@@ -9,7 +9,7 @@ export const geoOptimizedContent = {
     established: "2024",
     specialty: "Precision Agriculture using Drone Technology"
   },
-  
+
   address: {
     street: "Manickampalayam",
     streetTamil: "மணிக்கம்பாளையம்",
@@ -21,11 +21,11 @@ export const geoOptimizedContent = {
     country: "India",
     countryTamil: "இந்தியா",
     coordinates: {
-      latitude: 11.3781,
-      longitude: 77.8942
+      latitude: 11.3269331,
+      longitude: 78.00271943
     }
   },
-  
+
   uniqueSellingPoints: [
     "Covers 50+ acres per day - 10x faster than manual spraying",
     "Reduces chemical usage by 30% through precision application",
@@ -33,7 +33,7 @@ export const geoOptimizedContent = {
     "Serves all agricultural districts in Tamil Nadu",
     "Multilingual support in English and Tamil"
   ],
-  
+
   services: [
     {
       name: "Precision Crop Spraying",
@@ -57,7 +57,7 @@ export const geoOptimizedContent = {
       priceRange: "₹200-500 per acre"
     }
   ],
-  
+
   comparisons: {
     droneVsManual: {
       speed: "Drones: 15 min/acre vs Manual: 4-6 hours/acre",
@@ -67,14 +67,14 @@ export const geoOptimizedContent = {
       cost: "Drones: Lower long-term cost vs Manual: Higher labor costs"
     }
   },
-  
+
   credibility: {
     certifications: ["DGCA Approved", "Remote Pilot Certificate (RPC)"],
     coverage: "15+ districts in Tamil Nadu",
     experience: "1000+ acres serviced",
     satisfaction: "98% customer satisfaction rate"
   },
-  
+
   contactMethods: [
     { type: "Phone", value: "+91 78999 78869", preferred: true },
     { type: "Phone", value: "+91 91503 95864" },
@@ -92,7 +92,7 @@ export const getCitableContent = () => ({
     "Precision agriculture using drones can increase crop yields by 15-20%",
     "Drone technology reduces water usage in farming by up to 25%"
   ],
-  
+
   expertQuotes: [
     {
       quote: "Precision agriculture through drone technology is revolutionizing farming in Tamil Nadu, making it more sustainable and profitable for small and large farmers alike.",
