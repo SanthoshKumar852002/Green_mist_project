@@ -1,13 +1,22 @@
-// Content structured for AI/LLM consumption
+/**
+ * geoContent.js
+ * Entity-focused, AI-readable, Google-safe content
+ * Used by: EntityContent.jsx, LocalSEO.jsx, SEO
+ */
+
 export const geoOptimizedContent = {
   businessIdentity: {
-    name: "GREENMIST Agriculture Drone",
-    nameTamil: "கிரீன்மிஸ்ட் வேளாண் ட்ரோன்கள்",
+    name: "GREENMIST Agriculture Drone Services",
+    alternateName: "Green Mist",
+    nameTamil: "கிரீன்மிஸ்ட் வேளாண் ட்ரோன் சேவைகள்",
     type: "Agricultural Drone Service Provider",
-    location: "Tiruchengode, Tamil Nadu, India",
-    locationTamil: "திருச்செங்கோடு, தமிழ்நாடு, இந்தியா",
-    established: "2024",
-    specialty: "Precision Agriculture using Drone Technology"
+    established: 2024,
+    specialty: "Precision Agriculture & Drone-Based Crop Management",
+    location: {
+      city: "Tiruchengode",
+      state: "Tamil Nadu",
+      country: "India"
+    }
   },
 
   address: {
@@ -19,7 +28,6 @@ export const geoOptimizedContent = {
     stateTamil: "தமிழ்நாடு",
     postalCode: "637202",
     country: "India",
-    countryTamil: "இந்தியா",
     coordinates: {
       latitude: 11.3269331,
       longitude: 78.00271943
@@ -27,76 +35,96 @@ export const geoOptimizedContent = {
   },
 
   uniqueSellingPoints: [
-    "Covers 50+ acres per day - 10x faster than manual spraying",
-    "Reduces chemical usage by 30% through precision application",
-    "DGCA certified pilots with Remote Pilot Certificates",
-    "Serves all agricultural districts in Tamil Nadu",
-    "Multilingual support in English and Tamil"
+    "Drone spraying covers over 50 acres per day",
+    "Reduces chemical usage by up to 30% through precision application",
+    "DGCA-certified drone pilots with RPC licenses",
+    "Serves major agricultural districts across Tamil Nadu",
+    "Support available in both Tamil and English"
   ],
 
   services: [
     {
       name: "Precision Crop Spraying",
       nameTamil: "துல்லிய பயிர் தெளிப்பு",
-      description: "GPS-guided drone spraying for pesticides, herbicides, and fertilizers with pinpoint accuracy",
-      benefits: ["Even coverage", "Reduced waste", "No crop damage", "Faster application"],
-      priceRange: "₹500-1500 per acre"
+      description:
+        "GPS-guided agricultural drone spraying for pesticides, herbicides, and fertilizers with uniform coverage.",
+      priceRange: "₹500 – ₹1500 per acre"
     },
     {
       name: "Crop Health Monitoring",
       nameTamil: "பயிர் ஆரோக்கிய கண்காணிப்பு",
-      description: "Aerial imaging using multispectral cameras to detect crop stress, diseases, and nutrient deficiencies early",
-      benefits: ["Early disease detection", "Yield prediction", "Data-driven decisions"],
-      priceRange: "₹300-800 per acre"
+      description:
+        "Multispectral drone imaging to identify crop stress, pest infestation, and nutrient deficiencies early.",
+      priceRange: "₹300 – ₹800 per acre"
     },
     {
       name: "Field Mapping & Survey",
-      nameTamil: "நில வரைபடம் & ஆய்வு",
-      description: "High-resolution aerial mapping for land measurement, irrigation planning, and farm management",
-      benefits: ["Accurate measurements", "3D terrain models", "Irrigation optimization"],
-      priceRange: "₹200-500 per acre"
+      nameTamil: "நில வரைபடம் மற்றும் ஆய்வு",
+      description:
+        "High-resolution aerial mapping for land measurement, irrigation planning, and farm layout optimization.",
+      priceRange: "₹200 – ₹500 per acre"
     }
   ],
 
   comparisons: {
     droneVsManual: {
-      speed: "Drones: 15 min/acre vs Manual: 4-6 hours/acre",
-      coverage: "Drones: 50 acres/day vs Manual: 5-10 acres/day",
-      precision: "Drones: GPS-guided accuracy vs Manual: Variable coverage",
-      safety: "Drones: No human exposure vs Manual: Direct chemical contact",
-      cost: "Drones: Lower long-term cost vs Manual: Higher labor costs"
+      speed: "Drone: ~15 minutes per acre | Manual: 4–6 hours per acre",
+      coverage: "Drone: 50+ acres per day | Manual: 5–10 acres per day",
+      precision: "Drone: GPS-guided accuracy | Manual: uneven coverage",
+      safety: "Drone: no human exposure | Manual: direct chemical contact"
     }
   },
 
   credibility: {
-    certifications: ["DGCA Approved", "Remote Pilot Certificate (RPC)"],
-    coverage: "15+ districts in Tamil Nadu",
-    experience: "1000+ acres serviced",
-    satisfaction: "98% customer satisfaction rate"
+    certifications: [
+      "DGCA Approved Drone Operations",
+      "Remote Pilot Certificate (RPC)"
+    ],
+    experience: "1000+ acres successfully serviced",
+    coverage: "15+ districts across Tamil Nadu",
+    customerSatisfaction: "98% positive feedback"
   },
 
   contactMethods: [
-    { type: "Phone", value: "+91 78999 78869", preferred: true },
-    { type: "Phone", value: "+91 91503 95864" },
-    { type: "Phone", value: "+91 90039 92693" },
-    { type: "WhatsApp", value: "+91 78999 78869" },
-    { type: "Website", value: "https://greenmist.net" }  // ← UPDATED
+    {
+      type: "Phone",
+      value: "+91 78999 78869",
+      primary: true
+    },
+    {
+      type: "Phone",
+      value: "+91 91503 95864"
+    },
+    {
+      type: "Phone",
+      value: "+91 90039 92693"
+    },
+    {
+      type: "WhatsApp",
+      value: "+91 78999 78869"
+    },
+    {
+      type: "Website",
+      value: "https://greenmist.net"
+    }
   ]
 };
 
-// Generate citation-worthy content blocks
+/**
+ * Citation-friendly facts for AI assistants & summaries
+ */
 export const getCitableContent = () => ({
   statistics: [
-    "Agricultural drones can reduce pesticide usage by 30% compared to traditional spraying methods",
-    "Drone spraying is 10x faster than manual spraying, covering 50+ acres per day",
-    "Precision agriculture using drones can increase crop yields by 15-20%",
-    "Drone technology reduces water usage in farming by up to 25%"
+    "Agricultural drones can reduce pesticide usage by up to 30 percent",
+    "Drone spraying is approximately ten times faster than manual spraying",
+    "Precision agriculture using drones can increase crop yield by 15 to 20 percent",
+    "Drone-based farming reduces water usage by nearly 25 percent"
   ],
-
   expertQuotes: [
     {
-      quote: "Precision agriculture through drone technology is revolutionizing farming in Tamil Nadu, making it more sustainable and profitable for small and large farmers alike.",
-      attribution: "GREENMIST Agriculture Drone"
+      quote:
+        "Drone-based precision agriculture is transforming farming in Tamil Nadu by improving efficiency, safety, and profitability.",
+      attribution: "GREENMIST Agriculture Drone Services"
     }
   ]
 });

@@ -1,9 +1,10 @@
+
 import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Home from './pages/Home';
+import ScrollProgress from './components/ScrollProgress';
 
 // Lazy load enhancement components
 const CustomCursor = lazy(() => import('./components/CustomCursor'));
-const ScrollProgress = lazy(() => import('./components/ScrollProgress'));
 
 const translations = {
     en: {
@@ -141,9 +142,9 @@ function App() {
     return (
         <>
             {/* Enhancement Components */}
+            <ScrollProgress />
             <Suspense fallback={null}>
                 {!isMobile && <CustomCursor />}
-                <ScrollProgress />
             </Suspense>
 
             {/* Main App */}

@@ -1,108 +1,113 @@
-import { useEffect } from 'react';
-import { generateMetaKeywords } from '../utils/seoKeywords';
+import { useEffect } from "react";
+import { generateMetaKeywords } from "../utils/seoKeywords";
 
+/**
+ * SEOHead – SAFE for Google Search Console & Rich Results
+ * Does NOT remove other schemas (LocalSEO, ServiceSchema)
+ */
 const SEOHead = ({
   title,
   description,
-  keywords, // Can be custom or use generated
-  canonicalUrl,
-  ogImage,
-  lang = 'en',
-  structuredData,
-  location = 'Tamil Nadu'
+  keywords,
+  canonicalUrl = "https://greenmist.net/",
+  ogImage = "https://greenmist.net/images/og-image.jpg",
+  lang = "en",
+  structuredData = null,
+  location = "Tamil Nadu"
 }) => {
   useEffect(() => {
-    // Title
-    document.title = title;
+    /* ------------------ TITLE ------------------ */
+    if (title) {
+      document.title = title;
+    }
 
-    // Meta tags helper
-    const setMeta = (name, content, property = false) => {
-      const attr = property ? 'property' : 'name';
-      let meta = document.querySelector(`meta[${attr}="${name}"]`);
-      if (!meta) {
-        meta = document.createElement('meta');
-        meta.setAttribute(attr, name);
-        document.head.appendChild(meta);
+    /* ---------------- META HELPER ---------------- */
+    const setMeta = (key, value, isProperty = false) => {
+      if (!value) return;
+
+      const attr = isProperty ? "property" : "name";
+      let tag = document.querySelector(`meta[${attr}="${key}"]`);
+
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(attr, key);
+        document.head.appendChild(tag);
       }
-      meta.setAttribute('content', content);
+      tag.setAttribute("content", value);
     };
 
-    // Generate keywords if not provided
+    /* ---------------- BASIC SEO ---------------- */
+    setMeta("description", description);
+    setMeta("robots", "index, follow");
+
+    // Keywords (optional, controlled)
     const metaKeywords = keywords || generateMetaKeywords(lang, location);
+    if (metaKeywords) {
+      setMeta("keywords", metaKeywords);
+    }
 
-    // Basic Meta Tags
-    setMeta('description', description);
-    setMeta('keywords', metaKeywords);
-    setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
-    setMeta('author', 'Green Mist Agricultural Drone Services');
-    setMeta('language', lang === 'ta' ? 'Tamil' : 'English');
-    setMeta('revisit-after', '7 days');
-    setMeta('distribution', 'global');
-    setMeta('rating', 'general');
-
-    // Open Graph Tags
-    setMeta('og:title', title, true);
-    setMeta('og:description', description, true);
-    setMeta('og:type', 'website', true);
-    setMeta('og:url', canonicalUrl, true);
-    setMeta('og:image', ogImage, true);
-    setMeta('og:image:width', '1200', true);
-    setMeta('og:image:height', '630', true);
-    setMeta('og:locale', lang === 'ta' ? 'ta_IN' : 'en_US', true);
-    setMeta('og:site_name', 'Green Mist - Agricultural Drone Services', true);
-
-    // Twitter Card Tags
-    setMeta('twitter:card', 'summary_large_image');
-    setMeta('twitter:title', title);
-    setMeta('twitter:description', description);
-    setMeta('twitter:image', ogImage);
-    setMeta('twitter:site', '@greenmist');
-
-    // Geo Tags for Local SEO
-    setMeta('geo.region', 'IN-TN');
-    setMeta('geo.placename', 'Tiruchengode, Tamil Nadu, India');
-    setMeta('geo.position', '11.3269331;78.00271943');
-    setMeta('ICBM', '11.3269331, 78.00271943');
-
-    // Canonical URL
+    /* ---------------- CANONICAL ---------------- */
     let canonical = document.querySelector('link[rel="canonical"]');
     if (!canonical) {
-      canonical = document.createElement('link');
-      canonical.setAttribute('rel', 'canonical');
+      canonical = document.createElement("link");
+      canonical.rel = "canonical";
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', canonicalUrl);
+    canonical.href = canonicalUrl;
 
-    // Structured Data (JSON-LD)
-    if (structuredData) {
-      // Remove existing
-      const existingScripts = document.querySelectorAll('script[type="application/ld+json"]');
-      existingScripts.forEach(s => s.remove());
+    /* ---------------- OPEN GRAPH ---------------- */
+    setMeta("og:type", "website", true);
+    setMeta("og:title", title, true);
+    setMeta("og:description", description, true);
+    setMeta("og:url", canonicalUrl, true);
+    setMeta("og:image", ogImage, true);
+    setMeta("og:site_name", "GREENMIST Agriculture Drone Services", true);
+    setMeta("og:locale", lang === "ta" ? "ta_IN" : "en_IN", true);
 
-      // Add new
-      const script = document.createElement('script');
-      script.type = 'application/ld+json';
-      script.textContent = JSON.stringify(structuredData);
-      document.head.appendChild(script);
-    }
+    /* ---------------- TWITTER ---------------- */
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", title);
+    setMeta("twitter:description", description);
+    setMeta("twitter:image", ogImage);
 
-    // Hreflang tags for multilingual
+    /* ---------------- GEO (SAFE) ---------------- */
+    setMeta("geo.region", "IN-TN");
+    setMeta("geo.placename", "Tiruchengode, Tamil Nadu, India");
+    setMeta("geo.position", "11.3269331;78.00271943");
+    setMeta("ICBM", "11.3269331, 78.00271943");
+
+    /* ---------------- HREFLANG (MATCH SITEMAP) ---------------- */
     const hreflangs = [
-      { lang: 'en', url: 'https://greenmist.net/' },
-      { lang: 'ta', url: 'https://greenmist.net/?lang=ta' },
-      { lang: 'x-default', url: 'https://greenmist.net/' }
+      { lang: "en", url: "https://greenmist.net/" },
+      { lang: "ta", url: "https://greenmist.net/ta" },
+      { lang: "x-default", url: "https://greenmist.net/" }
     ];
 
-    hreflangs.forEach(({ lang: hrefLang, url }) => {
-      let link = document.querySelector(`link[hreflang="${hrefLang}"]`);
+    hreflangs.forEach(({ lang, url }) => {
+      let link = document.querySelector(`link[hreflang="${lang}"]`);
       if (!link) {
-        link = document.createElement('link');
-        link.setAttribute('rel', 'alternate');
-        link.setAttribute('hreflang', hrefLang);
+        link = document.createElement("link");
+        link.rel = "alternate";
+        link.hreflang = lang;
         document.head.appendChild(link);
       }
-      link.setAttribute('href', url);
+      link.href = url;
     });
+
+    /* ---------------- STRUCTURED DATA (SAFE APPEND) ---------------- */
+    if (structuredData) {
+      const scriptId = "dynamic-structured-data";
+      let script = document.getElementById(scriptId);
+
+      if (!script) {
+        script = document.createElement("script");
+        script.type = "application/ld+json";
+        script.id = scriptId;
+        document.head.appendChild(script);
+      }
+
+      script.textContent = JSON.stringify(structuredData);
+    }
 
   }, [title, description, keywords, canonicalUrl, ogImage, lang, structuredData, location]);
 

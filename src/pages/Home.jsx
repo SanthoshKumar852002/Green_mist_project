@@ -1,3 +1,4 @@
+
 import React, { Suspense } from "react";
 import SEOHead from "../components/SEOHead";
 import LocalSEOData, { ServiceAreaSchema } from "../components/LocalSEO";
@@ -23,11 +24,11 @@ const Home = ({ lang, onSelectLang }) => {
     // Business info for LocalSEO component
     const businessInfo = {
         name: "GREENMIST Agriculture Drone",
-        url: "https://greenmist.in",
-        email: "contact@greenmist.in",
+        url: "https://greenmist.net",
+        email: "contact@greenmist.net",
         priceRange: "₹₹",
         images: [
-            "https://greenmist.in/images/og-image.jpg"
+            "https://greenmist.net/images/og-image.jpg"
         ],
         phones: ["+91 78999 78869", "+91 91503 95864", "+91 90039 92693"],
         address: {
@@ -95,7 +96,7 @@ const Home = ({ lang, onSelectLang }) => {
 
     // Breadcrumbs
     const breadcrumbs = [
-        { name: lang === 'ta' ? 'முகப்பு' : 'Home', url: `https://greenmist.in/${lang}` }
+        { name: lang === 'ta' ? 'முகப்பு' : 'Home', url: `https://greenmist.net/${lang}` }
     ];
 
     // Combined schema
@@ -109,8 +110,8 @@ const Home = ({ lang, onSelectLang }) => {
             getBreadcrumbSchema(breadcrumbs),
             {
                 "@type": "WebSite",
-                "@id": "https://greenmist.in/#website",
-                "url": "https://greenmist.in",
+                "@id": "https://greenmist.net/#website",
+                "url": "https://greenmist.net",
                 "name": "Green Mist",
                 "description": "Agricultural Drone Services in Tamil Nadu",
                 "inLanguage": lang === 'ta' ? 'ta-IN' : 'en-US',
@@ -118,19 +119,19 @@ const Home = ({ lang, onSelectLang }) => {
                     "@type": "SearchAction",
                     "target": {
                         "@type": "EntryPoint",
-                        "urlTemplate": "https://greenmist.in/search?q={search_term_string}"
+                        "urlTemplate": "https://greenmist.net/search?q={search_term_string}"
                     },
                     "query-input": "required name=search_term_string"
                 }
             },
             {
                 "@type": "WebPage",
-                "@id": `https://greenmist.in/${lang}#webpage`,
-                "url": `https://greenmist.in/${lang}`,
+                "@id": `https://greenmist.net/${lang}#webpage`,
+                "url": `https://greenmist.net/${lang}`,
                 "name": currentSEO.title,
                 "description": currentSEO.description,
-                "isPartOf": { "@id": "https://greenmist.in/#website" },
-                "about": { "@id": "https://greenmist.in/#localbusiness" },
+                "isPartOf": { "@id": "https://greenmist.net/#website" },
+                "about": { "@id": "https://greenmist.net/#localbusiness" },
                 "inLanguage": lang === 'ta' ? 'ta-IN' : 'en-US',
                 "datePublished": "2024-01-01",
                 "dateModified": new Date().toISOString().split('T')[0]
@@ -150,8 +151,8 @@ const Home = ({ lang, onSelectLang }) => {
                 }
                 description="Professional agricultural drone services in Tamil Nadu"
                 keywords="drone spraying, agriculture, Tamil Nadu"
-                canonicalUrl="https://greenmist.in"
-                ogImage="https://greenmist.in/images/og-image.jpg"
+                canonicalUrl="https://greenmist.net"
+                ogImage="https://greenmist.net/images/og-image.jpg"
                 lang={lang}
                 structuredData={combinedSchema}
                 location={seoLocation}
@@ -164,7 +165,8 @@ const Home = ({ lang, onSelectLang }) => {
             <ServiceAreaSchema areas={serviceAreas} />
 
             {/* 4. Voice Search Optimized Content (hidden but crawlable) */}
-            <VoiceSearchContent lang={lang} />
+            {/* Commented out to fix GSC 'Duplicate field FAQPage' and 'Missing field acceptedAnswer' errors */}
+            {/* <VoiceSearchContent lang={lang} /> */}
 
             {/* 5. Entity Content for AI/LLM crawlers */}
             <EntityContent lang={lang} />

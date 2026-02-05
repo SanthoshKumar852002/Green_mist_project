@@ -1,70 +1,92 @@
-import React from 'react';
-import { geoOptimizedContent } from '../utils/geoContent';
+import React from "react";
+import { geoOptimizedContent } from "../utils/geoContent";
 
-// Component that provides entity-rich content for AI crawlers
-const EntityContent = ({ lang }) => {
+/**
+ * SEO + AI Entity Content
+ * Visible to crawlers, invisible to users without cloaking
+ */
+const EntityContent = () => {
   const content = geoOptimizedContent;
-  
+
   return (
-    <article 
-      className="hidden" 
-      itemScope 
-      itemType="https://schema.org/Article"
+    <section
+      style={{
+        position: "absolute",
+        left: "-9999px",
+        top: "auto",
+        width: "1px",
+        height: "1px",
+        overflow: "hidden",
+      }}
       aria-hidden="true"
     >
-      <header>
-        <h1 itemProp="headline">
-          Agricultural Drone Services in Tamil Nadu by Green Mist
-        </h1>
-        <meta itemProp="author" content="Green Mist" />
-        <meta itemProp="datePublished" content="2026-01-01" />
-        <meta itemProp="dateModified" content="2026-02-02" />
-      </header>
-      
-      <section itemProp="articleBody">
-        <h2>About Green Mist Agricultural Drone Services</h2>
-        <p>
-          {content.businessIdentity.name} is a {content.businessIdentity.type} based in {content.businessIdentity.location}. 
-          Established in {content.businessIdentity.established}, we specialize in {content.businessIdentity.specialty}.
-        </p>
-        
-        <h2>Our Services</h2>
-        {content.services.map((service, i) => (
-          <div key={i} itemScope itemType="https://schema.org/Service">
-            <h3 itemProp="name">{service.name}</h3>
-            <p itemProp="description">{service.description}</p>
-            <p>Price Range: <span itemProp="priceRange">{service.priceRange}</span></p>
-          </div>
-        ))}
-        
-        <h2>Why Choose Green Mist?</h2>
-        <ul>
-          {content.uniqueSellingPoints.map((point, i) => (
-            <li key={i}>{point}</li>
+      {/* ORGANIZATION / LOCAL BUSINESS ENTITY */}
+      <div
+        itemScope
+        itemType="https://schema.org/AgriculturalBusiness"
+      >
+        <meta itemProp="name" content={content.businessIdentity.name} />
+        <meta itemProp="url" content="https://greenmist.net/" />
+        <meta itemProp="logo" content="https://greenmist.net/images/og-image.jpg" />
+        <meta itemProp="foundingDate" content={content.businessIdentity.established} />
+        <meta itemProp="areaServed" content="Tamil Nadu, India" />
+        <meta itemProp="slogan" content="Smart Drone Farming Solutions" />
+
+        {/* GEO LOCATION */}
+        <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+          <meta itemProp="addressRegion" content="Tamil Nadu" />
+          <meta itemProp="addressCountry" content="IN" />
+        </div>
+
+        {/* SERVICES */}
+        <div itemProp="makesOffer" itemScope itemType="https://schema.org/OfferCatalog">
+          <meta itemProp="name" content="Agricultural Drone Services" />
+
+          {content.services.map((service, i) => (
+            <div
+              key={i}
+              itemProp="itemListElement"
+              itemScope
+              itemType="https://schema.org/Offer"
+            >
+              <div itemProp="itemOffered" itemScope itemType="https://schema.org/Service">
+                <meta itemProp="name" content={service.name} />
+                <meta itemProp="description" content={service.description} />
+                <meta itemProp="areaServed" content="Tamil Nadu" />
+              </div>
+
+              <meta itemProp="priceRange" content={service.priceRange} />
+            </div>
           ))}
-        </ul>
-        
-        <h2>Drone vs Traditional Farming Comparison</h2>
-        <dl>
-          <dt>Speed</dt>
-          <dd>{content.comparisons.droneVsManual.speed}</dd>
-          <dt>Daily Coverage</dt>
-          <dd>{content.comparisons.droneVsManual.coverage}</dd>
-          <dt>Precision</dt>
-          <dd>{content.comparisons.droneVsManual.precision}</dd>
-        </dl>
-        
-        <h2>Contact Information</h2>
-        <address itemScope itemType="https://schema.org/ContactPoint">
+        </div>
+
+        {/* CONTACT INFO */}
+        <div itemProp="contactPoint" itemScope itemType="https://schema.org/ContactPoint">
           {content.contactMethods.map((method, i) => (
-            <p key={i}>
-              <span itemProp="contactType">{method.type}</span>: 
-              <span itemProp={method.type === 'Phone' ? 'telephone' : 'url'}>{method.value}</span>
-            </p>
+            <meta
+              key={i}
+              itemProp={method.type === "Phone" ? "telephone" : "url"}
+              content={method.value}
+            />
           ))}
-        </address>
-      </section>
-    </article>
+          <meta itemProp="contactType" content="customer service" />
+          <meta itemProp="availableLanguage" content="Tamil, English" />
+        </div>
+
+        {/* WHY CHOOSE US */}
+        <div itemProp="knowsAbout">
+          {content.uniqueSellingPoints.map((point, i) => (
+            <meta key={i} content={point} />
+          ))}
+        </div>
+
+        {/* AI / SEARCH ENHANCEMENT */}
+        <meta
+          itemProp="description"
+          content="Green Mist provides professional agricultural drone spraying, crop monitoring, and precision farming services across Tamil Nadu."
+        />
+      </div>
+    </section>
   );
 };
 
