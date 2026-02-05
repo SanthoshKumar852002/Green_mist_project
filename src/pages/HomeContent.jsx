@@ -464,7 +464,7 @@ const HomeContent = ({ lang, t }) => {
                         </div>
                         <span className="text-lg sm:text-xl font-black tracking-tight text-white/40 hover:text-white/60 transition-colors">GREENMIST</span>
                     </motion.div>
-                    <p className="text-primary-400 font-black tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs">{t('copyright')}</p>
+                    <p className="text-primary-400 font-black tracking-[0.2em] sm:tracking-[0.3em] uppercase text-[10px] sm:text-xs">© 2026 Green Mist. All Rights Reserved.</p>
                 </div>
             </footer>
         </>

@@ -6,6 +6,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
     const [isLogoHovered, setIsLogoHovered] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
+    // Handle scroll effect
     useEffect(() => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
@@ -14,6 +15,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Lock body scroll when menu is open
     useEffect(() => {
         if (isMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -36,6 +38,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
         };
     }, [isMenuOpen]);
 
+    // Close menu on Escape key
     useEffect(() => {
         const handleEscape = (e) => {
             if (e.key === 'Escape') {
@@ -46,6 +49,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
         return () => window.removeEventListener('keydown', handleEscape);
     }, []);
 
+    // Handle navigation click
     const handleNavClick = (e, href) => {
         e.preventDefault();
         setIsMenuOpen(false);
@@ -107,31 +111,6 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
         </motion.a>
     );
 
-    const mobileMenuVariants = {
-        closed: {
-            opacity: 0,
-            height: 0,
-            transition: {
-                duration: 0.3,
-                when: "afterChildren"
-            }
-        },
-        open: {
-            opacity: 1,
-            height: "auto",
-            transition: {
-                duration: 0.3,
-                when: "beforeChildren",
-                staggerChildren: 0.1
-            }
-        }
-    };
-
-    const mobileItemVariants = {
-        closed: { opacity: 0, x: -20 },
-        open: { opacity: 1, x: 0 }
-    };
-
     return (
         <>
             <motion.nav 
@@ -153,6 +132,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
 
                 <div className="container mx-auto px-4 py-3">
                     <div className="flex items-center justify-between">
+                        {/* Logo Section */}
                         <div className="flex items-center gap-4">
                             <motion.div
                                 className="relative"
@@ -255,14 +235,16 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                             </motion.div>
                         </div>
 
+                        {/* Desktop Navigation */}
                         <div className="hidden md:flex items-center justify-center flex-1 gap-8">
                             <NavLink href="#home" index={0}>{t('navHome')}</NavLink>
                             <NavLink href="#about" index={1}>{t('navAbout')}</NavLink>
                             <NavLink href="#services" index={2}>{t('navServices')}</NavLink>
                         </div>
 
+                        {/* Desktop Actions */}
                         <div className="hidden md:flex items-center gap-4">
-                            <motion.div 
+                            <motion.div
                                 className="flex items-center bg-gray-100 rounded-full p-1 relative overflow-hidden"
                                 whileHover={{ scale: 1.02 }}
                             >
@@ -308,6 +290,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                             </motion.a>
                         </div>
 
+                        {/* Mobile Menu Button */}
                         <motion.button
                             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors relative"
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -332,9 +315,11 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                         </motion.button>
                     </div>
 
+                    {/* Mobile Menu */}
                     <AnimatePresence>
                         {isMenuOpen && (
                             <>
+                                {/* Overlay */}
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -345,6 +330,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                     aria-hidden="true"
                                 />
 
+                                {/* Menu Panel */}
                                 <motion.div
                                     initial={{ x: '100%' }}
                                     animate={{ x: 0 }}
@@ -352,6 +338,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                     transition={{ type: 'spring', damping: 25, stiffness: 200 }}
                                     className="fixed top-0 right-0 bottom-0 w-[85%] max-w-sm bg-white z-50 lg:hidden shadow-2xl overflow-y-auto"
                                 >
+                                    {/* Close Button */}
                                     <div className="flex justify-end p-4">
                                         <button
                                             onClick={() => setIsMenuOpen(false)}
@@ -364,6 +351,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                         </button>
                                     </div>
 
+                                    {/* Menu Links */}
                                     <div className="px-6 py-4 space-y-2">
                                         {[
                                             { href: '#home', label: t('navHome') },
@@ -385,10 +373,9 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                         ))}
                                     </div>
 
+                                    {/* Language Selector */}
                                     <div className="px-6 py-4 border-t border-gray-100">
-                                        <motion.div 
-                                            className="flex gap-3 pt-4 border-t border-gray-100 mt-4"
-                                        >
+                                        <motion.div className="flex gap-3 pt-4 border-t border-gray-100 mt-4">
                                             <button
                                                 onClick={() => { onSelectLang('en'); setIsMenuOpen(false); }}
                                                 className={`flex-1 py-3 rounded-xl text-sm font-bold transition-all ${
@@ -412,6 +399,7 @@ const Navbar = ({ t, onSelectLang, currentLang }) => {
                                         </motion.div>
                                     </div>
 
+                                    {/* Contact Info */}
                                     <div className="px-6 py-4 mt-auto border-t border-gray-100">
                                         <a
                                             href="tel:+917899978869"
