@@ -1,4 +1,44 @@
+# Robots.txt for GREENMIST Agriculture Drone
+# Website: https://greenmist.net
+
 User-agent: *
 Allow: /
 
+# Disallow admin/private areas
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+
+# Allow important resources
+Allow: /images/
+Allow: /assets/
+
+# Sitemap location - UPDATED URL
 Sitemap: https://greenmist.net/sitemap.xml
+
+# Crawl delay for general bots
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Google Image Bot
+User-agent: Googlebot-Image
+Allow: /images/
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex
+User-agent: Yandex
+Allow: /
+Crawl-delay: 2
+
+# DuckDuckGo
+User-agent: DuckDuckBot
+Allow: /
+Crawl-delay: 1

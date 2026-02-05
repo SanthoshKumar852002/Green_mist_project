@@ -6,11 +6,11 @@ import React from "react";
  */
 const LocalSEO = ({ businessInfo }) => {
   const defaultBusinessInfo = {
-    "@id": "https://greenmist.in/#greenmist",
+    "@id": "https://greenmist.net/#greenmist",
     name: "GREENMIST Agriculture Drone Services",
-    url: "https://greenmist.in/",
-    logo: "https://greenmist.in/images/og-image.jpg",
-    email: "contact@greenmist.in",
+    url: "https://greenmist.net/",
+    logo: "https://greenmist.net/images/og-image.jpg",
+    email: "contact@greenmist.net",
     phones: [
       "+917899978869",
       "+919150395864",
@@ -154,7 +154,7 @@ export const ServiceSchema = () => {
     "@id": "https://greenmist.in/#agri-drone-service",
     name: "Agricultural Drone Services in Tamil Nadu",
     provider: {
-      "@id": "https://greenmist.in/#greenmist"
+      "@id": "https://greenmist.net/#greenmist"
     },
     areaServed: {
       "@type": "AdministrativeArea",
@@ -182,7 +182,7 @@ export const ServiceAreaSchema = ({ areas = [] }) => {
     "@type": "Service",
     name: "Agricultural Drone Services",
     provider: {
-      "@id": "https://greenmist.in/#greenmist"
+      "@id": "https://greenmist.net/#greenmist"
     },
     areaServed: areas.map(area => ({
       "@type": "AdministrativeArea",
