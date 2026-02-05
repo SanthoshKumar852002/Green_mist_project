@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
+import { generateMetaKeywords } from '../utils/seoKeywords';
 
 const SEOHead = ({
   title,
   description,
-  keywords,
+  keywords, // Can be custom or use generated
   canonicalUrl,
   ogImage,
   lang = 'en',
   structuredData,
-  location
+  location = 'Tamil Nadu'
 }) => {
   useEffect(() => {
     // Title
@@ -26,12 +27,18 @@ const SEOHead = ({
       meta.setAttribute('content', content);
     };
 
+    // Generate keywords if not provided
+    const metaKeywords = keywords || generateMetaKeywords(lang, location);
+
     // Basic Meta Tags
     setMeta('description', description);
-    setMeta('keywords', keywords);
-    setMeta('robots', 'index, follow');
+    setMeta('keywords', metaKeywords);
+    setMeta('robots', 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1');
     setMeta('author', 'Green Mist Agricultural Drone Services');
     setMeta('language', lang === 'ta' ? 'Tamil' : 'English');
+    setMeta('revisit-after', '7 days');
+    setMeta('distribution', 'global');
+    setMeta('rating', 'general');
 
     // Open Graph Tags
     setMeta('og:title', title, true);
@@ -39,28 +46,23 @@ const SEOHead = ({
     setMeta('og:type', 'website', true);
     setMeta('og:url', canonicalUrl, true);
     setMeta('og:image', ogImage, true);
+    setMeta('og:image:width', '1200', true);
+    setMeta('og:image:height', '630', true);
     setMeta('og:locale', lang === 'ta' ? 'ta_IN' : 'en_US', true);
-    setMeta('og:site_name', 'Green Mist', true);
+    setMeta('og:site_name', 'Green Mist - Agricultural Drone Services', true);
 
     // Twitter Card Tags
     setMeta('twitter:card', 'summary_large_image');
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
     setMeta('twitter:image', ogImage);
+    setMeta('twitter:site', '@greenmist');
 
-    // Geo Tags for Local SEO - Use passed location or default
-    const defaultLocation = {
-      region: "IN-TN",
-      placename: "Tiruchengode, Tamil Nadu, India",
-      position: "11.3269331;78.00271943"
-    };
-
-    const geoLocation = location || defaultLocation;
-
-    setMeta('geo.region', geoLocation.region);
-    setMeta('geo.placename', geoLocation.placename);
-    setMeta('geo.position', geoLocation.position);
-    setMeta('ICBM', geoLocation.position.replace(';', ', '));
+    // Geo Tags for Local SEO
+    setMeta('geo.region', 'IN-TN');
+    setMeta('geo.placename', 'Tiruchengode, Tamil Nadu, India');
+    setMeta('geo.position', '11.3269331;78.00271943');
+    setMeta('ICBM', '11.3269331, 78.00271943');
 
     // Canonical URL
     let canonical = document.querySelector('link[rel="canonical"]');
@@ -73,20 +75,22 @@ const SEOHead = ({
 
     // Structured Data (JSON-LD)
     if (structuredData) {
-      let script = document.querySelector('script[type="application/ld+json"]');
-      if (!script) {
-        script = document.createElement('script');
-        script.type = 'application/ld+json';
-        document.head.appendChild(script);
-      }
+      // Remove existing
+      const existingScripts = document.querySelectorAll('script[type="application/ld+json"]');
+      existingScripts.forEach(s => s.remove());
+
+      // Add new
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
       script.textContent = JSON.stringify(structuredData);
+      document.head.appendChild(script);
     }
 
     // Hreflang tags for multilingual
     const hreflangs = [
-      { lang: 'en', url: 'https://greenmist.in/en' },
-      { lang: 'ta', url: 'https://greenmist.in/ta' },
-      { lang: 'x-default', url: 'https://greenmist.in' }
+      { lang: 'en', url: 'https://greenmist.net/' },
+      { lang: 'ta', url: 'https://greenmist.net/?lang=ta' },
+      { lang: 'x-default', url: 'https://greenmist.net/' }
     ];
 
     hreflangs.forEach(({ lang: hrefLang, url }) => {
