@@ -24,6 +24,35 @@
     </image:image>
   </url>
 
+  <!-- About Section -->
+  <url>
+    <loc>https://greenmist.net/#about</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Services Section -->
+  <url>
+    <loc>https://greenmist.net/#services</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://greenmist.net/images/seed_spraying.webp</image:loc>
+      <image:title>Drone Crop Spraying Services</image:title>
+      <image:caption>Precision drone spraying for pesticides and fertilizers</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Contact Section -->
+  <url>
+    <loc>https://greenmist.net/#contact</loc>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- Homepage - Tamil -->
   <url>
     <loc>https://greenmist.net/ta</loc>
