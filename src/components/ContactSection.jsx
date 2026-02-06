@@ -579,8 +579,9 @@ const ContactSection = ({ lang }) => {
               </motion.div>
 
               {/* Email */}
-              <motion.div
-                className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
+              <motion.a
+                href="mailto:greenmist695@gmail.com"
+                className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl cursor-pointer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -594,11 +595,9 @@ const ContactSection = ({ lang }) => {
                 </div>
                 <div>
                   <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{lang === 'ta' ? 'மின்னஞ்சல்' : 'Email'}</p>
-                  <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">
-                    <a href="mailto:greenmist695@gmail.com" itemProp="email" className="hover:text-emerald-600 transition-colors">greenmist695@gmail.com</a>
-                  </p>
+                  <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg" itemProp="email">greenmist695@gmail.com</p>
                 </div>
-              </motion.div>
+              </motion.a>
 
               <motion.div
                 className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
