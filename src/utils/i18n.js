@@ -116,7 +116,7 @@ const translations = {
         faq3q: "What is the cost of drone spraying services?",
         faq3a: "Drone spraying costs between ₹500-1500 per acre depending on the crop type, terrain, and chemicals used.",
         faq4q: "Do you provide services across Tamil Nadu?",
-        faq4a: "Yes, we serve all major agricultural districts in Tamil Nadu including Chennai, Coimbatore, Madurai, Salem, and more.",
+        faq4a: "Yes, we serve Namakkal, Salem, and Erode districts with professional drone spraying services.",
 
         copyright: "© 2024 Green Mist. All Rights Reserved.",
 

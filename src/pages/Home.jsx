@@ -46,9 +46,7 @@ const Home = ({ lang, onSelectLang }) => {
             { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "06:00", closes: "18:00" }
         ],
         serviceAreas: [
-            "Tiruchengode", "Namakkal", "Salem", "Erode", "Karur",
-            "Coimbatore", "Madurai", "Tiruchirappalli", "Dindigul",
-            "Thanjavur", "Chennai", "Vellore", "Tirunelveli"
+            "Namakkal", "Salem", "Erode"
         ],
         rating: {
             value: 4.8,
@@ -58,16 +56,9 @@ const Home = ({ lang, onSelectLang }) => {
 
     // Service areas for ServiceAreaSchema
     const serviceAreas = [
-        { name: "Chennai", state: "Tamil Nadu" },
-        { name: "Coimbatore", state: "Tamil Nadu" },
-        { name: "Madurai", state: "Tamil Nadu" },
-        { name: "Tiruchirappalli", state: "Tamil Nadu" },
+        { name: "Namakkal", state: "Tamil Nadu" },
         { name: "Salem", state: "Tamil Nadu" },
-        { name: "Tirunelveli", state: "Tamil Nadu" },
-        { name: "Erode", state: "Tamil Nadu" },
-        { name: "Vellore", state: "Tamil Nadu" },
-        { name: "Thanjavur", state: "Tamil Nadu" },
-        { name: "Dindigul", state: "Tamil Nadu" }
+        { name: "Erode", state: "Tamil Nadu" }
     ];
 
     // SEO configurations
@@ -205,10 +196,10 @@ const Home = ({ lang, onSelectLang }) => {
                 {/* Hidden SEO Content for Crawlers */}
                 <div className="hidden" aria-hidden="true">
                     <h1>Green Mist - Agricultural Drone Services Tamil Nadu</h1>
-                    <p>Professional drone spraying services for crops, pest control, and precision farming across Tamil Nadu including Chennai, Coimbatore, Madurai, Salem, Tiruchirappalli.</p>
+                    <p>Professional drone spraying services for crops, pest control, and precision farming in Namakkal, Salem, and Erode districts.</p>
                     <p>Services: Crop Spraying, Pest Control, Water Monitoring, Field Mapping, Crop Health Assessment</p>
                     <p>Contact: 78999 78869, 91503 95864, 90039 92693</p>
-                    <p>Service Areas: Chennai, Coimbatore, Madurai, Salem, Tiruchirappalli, Tirunelveli, Erode, Vellore, Thanjavur, Dindigul</p>
+                    <p>Service Areas: Namakkal, Salem, Erode</p>
                 </div>
             </div>
         </>

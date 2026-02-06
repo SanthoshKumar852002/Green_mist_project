@@ -58,14 +58,9 @@ export const longTailKeywords = {
 /* ================= LOCAL SEO (STRUCTURED USE ONLY) ================= */
 export const localSEOKeywords = {
   districts: [
-    "Tiruchengode",
     "Namakkal",
     "Salem",
-    "Erode",
-    "Karur",
-    "Coimbatore",
-    "Madurai",
-    "Tiruchirappalli"
+    "Erode"
   ]
 };
 

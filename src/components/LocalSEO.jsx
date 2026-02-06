@@ -46,12 +46,7 @@ const LocalSEO = ({ businessInfo }) => {
       "Tamil Nadu",
       "Namakkal",
       "Salem",
-      "Erode",
-      "Karur",
-      "Coimbatore",
-      "Madurai",
-      "Tiruchirappalli",
-      "Chennai"
+      "Erode"
     ],
     rating: {
       value: 4.8,

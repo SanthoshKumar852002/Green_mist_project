@@ -463,8 +463,8 @@ const HomeContent = ({ lang, t }) => {
                                 </p>
                                 <p>
                                     {lang === 'ta'
-                                        ? 'நாங்கள் திருச்செங்கோடு, நாமக்கல், சேலம், ஈரோடு, கரூர், கோயம்புத்தூர், மதுரை, திருச்சி, சென்னை மற்றும் திருநெல்வேலி உள்ளிட்ட பகுதிகளுக்கு சேவை செய்கிறோம்.'
-                                        : 'We serve farmers in Tiruchengode, Namakkal, Salem, Erode, Karur, Coimbatore, Madurai, Tiruchirappalli, Chennai, Dindigul, Thanjavur, Vellore, and Tirunelveli districts.'}
+                                        ? 'நாங்கள் நாமக்கல், சேலம் மற்றும் ஈரோடு மாவட்டங்களில் விவசாயிகளுக்கு சேவை செய்கிறோம்.'
+                                        : 'We serve farmers in Namakkal, Salem, and Erode districts.'}
                                 </p>
                             </div>
                             

@@ -578,6 +578,28 @@ const ContactSection = ({ lang }) => {
                 </div>
               </motion.div>
 
+              {/* Email */}
+              <motion.div
+                className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.15 }}
+                whileHover={{ y: -5 }}
+              >
+                <div className="bg-emerald-50 text-emerald-600 p-3 sm:p-4 rounded-xl sm:rounded-2xl group-hover:bg-emerald-500 group-hover:text-white transition-all">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+                  </svg>
+                </div>
+                <div>
+                  <p className="text-xs font-black text-gray-400 uppercase tracking-widest mb-1">{lang === 'ta' ? 'மின்னஞ்சல்' : 'Email'}</p>
+                  <p className="font-black text-primary-950 text-sm sm:text-base md:text-lg">
+                    <a href="mailto:greenmist695@gmail.com" itemProp="email" className="hover:text-emerald-600 transition-colors">greenmist695@gmail.com</a>
+                  </p>
+                </div>
+              </motion.div>
+
               <motion.div
                 className="p-6 sm:p-8 border border-gray-100 rounded-[1.5rem] sm:rounded-[2rem] flex items-center gap-4 sm:gap-6 group hover:border-emerald-500 transition-all bg-white shadow-sm hover:shadow-xl"
                 initial={{ opacity: 0, y: 20 }}
