@@ -1,16 +1,16 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
-  
+
   # 1. Serve existing files (like sitemap.xml, robots.txt, images) directly
-  # This fixes the "Sitemap is HTML" error
-  RewriteCond %{REQUEST_FILENAME} -f
+  # Fixed: Use [OR] to check if file OR directory exists
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-# 2. Redirect everything else to index.html for React Router
-
-# This fixes 404 errors on refresh
-
-RewriteRule ^ index.html [L]
+  # 2. Redirect everything else to index.html for SPA
+  # This fixes 404 errors on refresh
+  RewriteRule ^ index.html [L]
 </IfModule>
+</CodeContent>
+<parameter name="Complexity">3

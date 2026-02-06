@@ -3,6 +3,8 @@ import React, { useState, useEffect, lazy, Suspense } from 'react';
 import Home from './pages/Home';
 import ScrollProgress from './components/ScrollProgress';
 
+import FloatingActions from './components/FloatingActions';
+
 // Lazy load enhancement components
 const CustomCursor = lazy(() => import('./components/CustomCursor'));
 
@@ -152,6 +154,9 @@ function App() {
                 lang={lang}
                 onSelectLang={handleSelectLang}
             />
+
+            {/* Floating Actions & Scroll Arrow */}
+            <FloatingActions />
         </>
     );
 }
