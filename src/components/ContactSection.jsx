@@ -304,8 +304,6 @@ const ContactSection = ({ lang }) => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
                 aria-label="Frequently Asked Questions"
-                itemScope
-                itemType="https://schema.org/FAQPage"
               >
                 <div className="bg-gradient-to-br from-primary-50/80 to-emerald-50/80 border border-primary-100 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] h-full shadow-lg">
 
@@ -329,9 +327,6 @@ const ContactSection = ({ lang }) => {
                     {faqs.map((faq, i) => (
                       <article
                         key={i}
-                        itemScope
-                        itemProp="mainEntity"
-                        itemType="https://schema.org/Question"
                         className={`border rounded-xl sm:rounded-[1.5rem] transition-all duration-300 overflow-hidden ${openFaq === i
                           ? 'border-primary-500 bg-white shadow-lg shadow-emerald-500/10'
                           : 'border-primary-100 bg-white/50 hover:bg-white hover:border-primary-200'
@@ -344,7 +339,6 @@ const ContactSection = ({ lang }) => {
                           aria-controls={`faq-answer-${i}`}
                         >
                           <span
-                            itemProp="name"
                             className="text-primary-900 uppercase tracking-tight text-xs sm:text-sm md:text-base font-black leading-snug pr-4"
                           >
                             {faq.q}
@@ -363,16 +357,12 @@ const ContactSection = ({ lang }) => {
                           {openFaq === i && (
                             <motion.div
                               id={`faq-answer-${i}`}
-                              itemScope
-                              itemProp="acceptedAnswer"
-                              itemType="https://schema.org/Answer"
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: 'auto', opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
                               transition={{ duration: 0.3 }}
                             >
                               <p
-                                itemProp="text"
                                 className="px-4 sm:px-5 pb-4 sm:pb-5 text-gray-600 leading-relaxed text-sm md:text-base font-medium"
                               >
                                 {faq.a}

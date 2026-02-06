@@ -101,12 +101,6 @@ const LocalSEO = ({ businessInfo }) => {
       name: area
     })),
 
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: info.rating.value,
-      reviewCount: info.rating.count
-    },
-
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Agricultural Drone Services",

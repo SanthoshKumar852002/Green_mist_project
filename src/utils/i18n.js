@@ -118,7 +118,7 @@ const translations = {
         faq4q: "Do you provide services across Tamil Nadu?",
         faq4a: "Yes, we serve Namakkal, Salem, and Erode districts with professional drone spraying services.",
 
-        copyright: "© 2024 Green Mist. All Rights Reserved.",
+        copyright: "© 2026 Green Mist. All Rights Reserved.",
 
         calcTitle: "Calculate Your Savings",
         calcDesc: "See how much time and money you can save by switching from manual spraying to Greenmist Drones.",
