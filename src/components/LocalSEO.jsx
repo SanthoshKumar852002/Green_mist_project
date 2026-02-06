@@ -151,7 +151,7 @@ export const ServiceSchema = () => {
   const schema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": "https://greenmist.in/#agri-drone-service",
+    "@id": "https://greenmist.net/#agri-drone-service",
     name: "Agricultural Drone Services in Tamil Nadu",
     provider: {
       "@id": "https://greenmist.net/#greenmist"
