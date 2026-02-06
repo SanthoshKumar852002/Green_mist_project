@@ -1,20 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- Homepage - Single Page Application -->
+  <!-- Homepage - English -->
   <url>
     <loc>https://greenmist.net/</loc>
-    <lastmod>2026-02-05</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.net/"/>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.net/ta"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.net/"/>
+    <lastmod>2026-02-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://greenmist.net/images/og-image.jpg</image:loc>
+      <image:loc>https://greenmist.net/images/hero_banner_v2.webp</image:loc>
       <image:title>GREENMIST Agriculture Drone Services</image:title>
       <image:caption>Professional agricultural drone services in Tamil Nadu</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://greenmist.net/images/crop_monitoring.webp</image:loc>
+      <image:title>Crop Health Monitoring with Drones</image:title>
+      <image:caption>Real-time crop health assessment using drone technology</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Homepage - Tamil -->
+  <url>
+    <loc>https://greenmist.net/ta</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://greenmist.net/"/>
+    <xhtml:link rel="alternate" hreflang="ta" href="https://greenmist.net/ta"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://greenmist.net/"/>
+    <lastmod>2026-02-06</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://greenmist.net/images/hero_banner_v2.webp</image:loc>
+      <image:title>கிரீன்மிஸ்ட் வேளாண் ட்ரோன் சேவைகள்</image:title>
+      <image:caption>தமிழ்நாட்டில் தொழில்முறை வேளாண் ட்ரோன் சேவைகள்</image:caption>
     </image:image>
   </url>
 
 </urlset>
-</CodeContent>
-<parameter name="EmptyFile">false

@@ -449,6 +449,55 @@ const HomeContent = ({ lang, t }) => {
                     transition={{ duration: 5, repeat: Infinity }}
                 />
                 <div className="container mx-auto relative">
+                    {/* SEO Content Section */}
+                    <div className="max-w-4xl mx-auto mb-12 px-4 text-left">
+                        <div className="bg-primary-800/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm border border-primary-700/30">
+                            <h2 className="text-lg sm:text-xl font-bold text-white mb-4">
+                                {lang === 'ta' ? 'தமிழ்நாட்டின் முன்னணி வேளாண் ட்ரோன் சேவை' : 'Leading Agricultural Drone Service in Tamil Nadu'}
+                            </h2>
+                            <div className="text-primary-200 text-sm sm:text-base space-y-3 leading-relaxed">
+                                <p>
+                                    {lang === 'ta' 
+                                        ? 'GREENMIST வேளாண் ட்ரோன் சேவைகள் தமிழ்நாடு முழுவதும் துல்லிய விவசாய தீர்வுகளை வழங்குகிறது. எங்கள் அதிநவீன ட்ரோன் தொழில்நுட்பம் பயிர் தெளிப்பு, ஆரோக்கிய கண்காணிப்பு, விதை விதைப்பு மற்றும் நில ஆய்வு ஆகியவற்றை உள்ளடக்கியது.'
+                                        : 'GREENMIST Agricultural Drone Services provides precision farming solutions across Tamil Nadu. Our advanced drone technology covers crop spraying, health monitoring, seed sowing, and land surveying to help farmers increase yields while reducing costs.'}
+                                </p>
+                                <p>
+                                    {lang === 'ta'
+                                        ? 'நாங்கள் திருச்செங்கோடு, நாமக்கல், சேலம், ஈரோடு, கரூர், கோயம்புத்தூர், மதுரை, திருச்சி, சென்னை மற்றும் திருநெல்வேலி உள்ளிட்ட பகுதிகளுக்கு சேவை செய்கிறோம்.'
+                                        : 'We serve farmers in Tiruchengode, Namakkal, Salem, Erode, Karur, Coimbatore, Madurai, Tiruchirappalli, Chennai, Dindigul, Thanjavur, Vellore, and Tirunelveli districts.'}
+                                </p>
+                            </div>
+                            
+                            <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-4">
+                                <div className="text-center">
+                                    <div className="text-2xl sm:text-3xl font-black text-emerald-400">50+</div>
+                                    <div className="text-xs text-primary-300">{lang === 'ta' ? 'ஏக்கர்/நாள்' : 'Acres/Day'}</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl sm:text-3xl font-black text-emerald-400">30%</div>
+                                    <div className="text-xs text-primary-300">{lang === 'ta' ? 'செலவு சேமிப்பு' : 'Cost Savings'}</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl sm:text-3xl font-black text-emerald-400">90%</div>
+                                    <div className="text-xs text-primary-300">{lang === 'ta' ? 'நீர் சேமிப்பு' : 'Water Saved'}</div>
+                                </div>
+                                <div className="text-center">
+                                    <div className="text-2xl sm:text-3xl font-black text-emerald-400">127+</div>
+                                    <div className="text-xs text-primary-300">{lang === 'ta' ? 'திருப்தியான வாடிக்கையாளர்கள்' : 'Happy Farmers'}</div>
+                                </div>
+                            </div>
+
+                            <div className="mt-6 pt-4 border-t border-primary-700/50">
+                                <h3 className="text-sm font-bold text-white mb-2">{lang === 'ta' ? 'எங்களை தொடர்பு கொள்ள:' : 'Contact Us:'}</h3>
+                                <div className="text-primary-200 text-sm space-y-1">
+                                    <p>📞 +91 78999 78869 | +91 91503 95864 | +91 90039 92693</p>
+                                    <p>📍 Manickampalayam, Tiruchengode, Tamil Nadu 637202</p>
+                                    <p>🌐 greenmist.net</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <motion.div
                         className="flex items-center justify-center gap-2 mb-2"
                         whileHover={{ scale: 1.05 }}

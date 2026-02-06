@@ -27,7 +27,7 @@ const EntityContent = () => {
       >
         <meta itemProp="name" content={content.businessIdentity.name} />
         <meta itemProp="url" content="https://greenmist.net/" />
-        <meta itemProp="logo" content="https://greenmist.net/images/og-image.jpg" />
+        <meta itemProp="logo" content="https://greenmist.net/images/logo_round.png" />
         <meta itemProp="foundingDate" content={content.businessIdentity.established} />
         <meta itemProp="areaServed" content="Tamil Nadu, India" />
         <meta itemProp="slogan" content="Smart Drone Farming Solutions" />

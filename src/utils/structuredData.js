@@ -11,11 +11,11 @@ export const getLocalBusinessSchema = (lang = "en") => ({
     ? "தமிழ்நாட்டில் துல்லிய விவசாயம், பயிர் தெளிப்பு மற்றும் நில வரைபடத்திற்கான தொழில்முறை வேளாண் ட்ரோன் சேவைகள்"
     : "Professional agricultural drone services for precision farming, crop spraying, and field mapping in Tamil Nadu",
   "url": "https://greenmist.net",
-  "logo": "https://greenmist.net/images/logo.png",
+  "logo": "https://greenmist.net/images/logo_round.png",
   "image": [
-    "https://greenmist.net/images/drone-spraying.jpg",
-    "https://greenmist.net/images/team.jpg",
-    "https://greenmist.net/images/og-image.jpg"
+    "https://greenmist.net/images/hero_banner_v2.webp",
+    "https://greenmist.net/images/crop_monitoring.webp",
+    "https://greenmist.net/images/seed_spraying.webp"
   ],
   "priceRange": "₹₹",
   "address": {
@@ -140,7 +140,7 @@ export const getOrganizationSchema = () => ({
   "@id": "https://greenmist.net/#organization",
   "name": "GREENMIST Agriculture Drone",
   "url": "https://greenmist.net",
-  "logo": "https://greenmist.net/images/logo.png",
+  "logo": "https://greenmist.net/images/logo_round.png",
   "description": "Leading agricultural drone service provider in Tamil Nadu",
   "foundingDate": "2024",
   "sameAs": [

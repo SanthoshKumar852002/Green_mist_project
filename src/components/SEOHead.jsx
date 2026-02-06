@@ -10,7 +10,7 @@ const SEOHead = ({
   description,
   keywords,
   canonicalUrl = "https://greenmist.net/",
-  ogImage = "https://greenmist.net/images/og-image.jpg",
+  ogImage = "https://greenmist.net/images/hero_banner_v2.webp",
   lang = "en",
   structuredData = null,
   location = "Tamil Nadu"

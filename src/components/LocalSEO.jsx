@@ -9,7 +9,7 @@ const LocalSEO = ({ businessInfo }) => {
     "@id": "https://greenmist.net/#greenmist",
     name: "GREENMIST Agriculture Drone Services",
     url: "https://greenmist.net/",
-    logo: "https://greenmist.net/images/og-image.jpg",
+    logo: "https://greenmist.net/images/logo_round.png",
     email: "contact@greenmist.net",
     phones: [
       "+917899978869",

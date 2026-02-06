@@ -28,7 +28,7 @@ const Home = ({ lang, onSelectLang }) => {
         email: "contact@greenmist.net",
         priceRange: "₹₹",
         images: [
-            "https://greenmist.net/images/og-image.jpg"
+            "https://greenmist.net/images/hero_banner_v2.webp"
         ],
         phones: ["+91 78999 78869", "+91 91503 95864", "+91 90039 92693"],
         address: {
@@ -152,7 +152,7 @@ const Home = ({ lang, onSelectLang }) => {
                 description="Professional agricultural drone services in Tamil Nadu"
                 keywords="drone spraying, agriculture, Tamil Nadu"
                 canonicalUrl="https://greenmist.net"
-                ogImage="https://greenmist.net/images/og-image.jpg"
+                ogImage="https://greenmist.net/images/hero_banner_v2.webp"
                 lang={lang}
                 structuredData={combinedSchema}
                 location={seoLocation}
