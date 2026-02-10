@@ -114,8 +114,62 @@ const HomeContent = ({ lang, t }) => {
         }
     }, [lang]);
 
-    return (
-        <>
+        return (
+                <>
+                        {/* SEO/Intro Section: About Green Mist */}
+                            <section className="max-w-6xl mx-auto my-8 p-4 sm:p-6 lg:p-8 bg-white/90 rounded-2xl shadow-lg border border-primary-100 text-primary-900">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                                    <div className="pl-4 md:pl-8">
+                                    <h2 className="text-2xl sm:text-3xl font-black mb-4 text-primary-800">{lang === 'ta' ? 'கிரீன் மிஸ்ட் பற்றி' : 'About Green Mist'}</h2>
+                                    <p className="mb-3 text-base sm:text-lg leading-relaxed">
+                                        {lang === 'ta'
+                                            ? 'கிரீன் மிஸ்ட் தமிழ்நாட்டில் முன்னணி வேளாண் ட்ரோன் சேவை வழங்குநராகும். நவீன ட்ரோன் தொழில்நுட்பம் மூலம் விவசாயிகள் துல்லியமான பயிர் தெளிப்பு, ஆரோக்கிய கண்காணிப்பு, நில அளவை மற்றும் அதிக விளைச்சலை பெற உதவுகிறோம்.'
+                                            : 'Green Mist is a leading provider of agricultural drone services in Tamil Nadu. We empower farmers with advanced drone technology for precision crop spraying, health monitoring, land surveying, and increased yields.'}
+                                    </p>
+                                    <p className="mb-3 text-base sm:text-lg leading-relaxed">
+                                        {lang === 'ta'
+                                            ? 'எங்கள் டிஜிசிஏ சான்றளிக்கப்பட்ட பைலட்கள் மற்றும் நவீன ட்ரோன்கள் மூலம், விவசாயிகள் 50+ ஏக்கர் நிலங்களை தினமும் பாதுகாப்பாகவும், குறைந்த செலவில் கையாள முடிகிறது.'
+                                            : 'With DGCA-certified pilots and state-of-the-art drones, our team covers over 50 acres per day, helping farmers save costs, water, and time while protecting the environment.'}
+                                    </p>
+                                    <ul className="list-disc pl-6 mb-3 text-base sm:text-lg">
+                                        <li>{lang === 'ta' ? '90% குறைவான நீர் பயன்பாடு' : '90% less water usage than traditional methods'}</li>
+                                        <li>{lang === 'ta' ? '30% செலவு சேமிப்பு' : '30% cost savings for farmers'}</li>
+                                        <li>{lang === 'ta' ? 'நாமக்கல், சேலம், ஈரோடு உள்ளிட்ட மாவட்டங்களில் சேவை' : 'Serving Namakkal, Salem, Erode, and nearby districts'}</li>
+                                        <li>{lang === 'ta' ? 'பயிர் ஆரோக்கிய கண்காணிப்பு, பூச்சிக்கொல்லி தெளிப்பு, நில அளவை' : 'Crop health monitoring, pesticide spraying, land mapping'}</li>
+                                    </ul>
+                                    <p className="text-base sm:text-lg">
+                                        {lang === 'ta'
+                                            ? 'உங்கள் விவசாயத்தை மாற்ற கிரீன் மிஸ்டை இன்று தொடர்பு கொள்ளுங்கள்! இலவச ஆலோசனைக்கு அழைக்கவும்: 78999 78869.'
+                                            : 'Ready to transform your farming? Contact Green Mist today for a free consultation: 78999 78869.'}
+                                    </p>
+                                </div>
+
+                                <div className="flex items-center justify-center">
+                                    <div className="relative w-full max-w-md">
+                                            {/* subtle blurred duplicate behind for soft shadow/opacity effect */}
+                                            <img
+                                                src="/images/about%20image.png"
+                                                alt="about image blurred"
+                                                className="absolute inset-0 w-full h-full rounded-2xl object-cover filter blur-xl opacity-30 transform translate-y-4 scale-105 transition-all duration-500"
+                                                style={{ pointerEvents: 'none' }}
+                                            />
+
+                                            <img
+                                                src="/images/about%20image.png"
+                                                alt="about image"
+                                                loading="lazy"
+                                                decoding="async"
+                                                width={720}
+                                                height={480}
+                                                className="relative w-full rounded-2xl object-cover shadow-2xl transform transition-transform duration-500 hover:scale-105"
+                                                style={{ boxShadow: '0 30px 60px rgba(16,185,129,0.12)' }}
+                                            />
+
+                                            <div className="absolute inset-0 rounded-2xl pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.06), transparent)' }} />
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
             {/* Interactive Feature Exploration */}
             <section id="about" ref={containerRef} className="py-10 sm:py-14 md:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-primary-50/30 relative overflow-hidden">
                 {/* Floating background elements */}
