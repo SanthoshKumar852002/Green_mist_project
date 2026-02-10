@@ -452,9 +452,9 @@ const HomeContent = ({ lang, t }) => {
                     {/* SEO Content Section */}
                     <div className="max-w-4xl mx-auto mb-12 px-4 text-left">
                         <div className="bg-primary-800/50 rounded-2xl p-6 sm:p-8 backdrop-blur-sm border border-primary-700/30">
-                            <h2 className="text-lg sm:text-xl font-bold text-white mb-4">
+                            <h3 className="text-lg sm:text-xl font-bold text-white mb-4">
                                 {lang === 'ta' ? 'தமிழ்நாட்டின் முன்னணி வேளாண் ட்ரோன் சேவை' : 'Leading Agricultural Drone Service in Tamil Nadu'}
-                            </h2>
+                            </h3>
                             <div className="text-primary-200 text-sm sm:text-base space-y-3 leading-relaxed">
                                 <p>
                                     {lang === 'ta' 
@@ -463,8 +463,18 @@ const HomeContent = ({ lang, t }) => {
                                 </p>
                                 <p>
                                     {lang === 'ta'
-                                        ? 'நாங்கள் நாமக்கல், சேலம் மற்றும் ஈரோடு மாவட்டங்களில் விவசாயிகளுக்கு சேவை செய்கிறோம்.'
-                                        : 'We serve farmers in Namakkal, Salem, and Erode districts.'}
+                                        ? 'எங்கள் ட்ரோன் தெளிப்பு சேவைகள் பாரம்பரிய முறைகளை விட 90% குறைவான நீர் பயன்படுத்துகின்றன, இது சுற்றுச்சூழலுக்கு உகந்ததாகவும், செலவு குறைந்ததாகவும் உள்ளது. நவீன GPS தொழில்நுட்பத்துடன், ஒவ்வொரு சொட்டும் சரியான இடத்தில் விழும்.'
+                                        : 'Our drone spraying services use 90% less water compared to traditional methods, making them environmentally friendly and cost-effective. With modern GPS technology, every drop lands exactly where it needs to be, ensuring uniform coverage across your entire field.'}
+                                </p>
+                                <p>
+                                    {lang === 'ta'
+                                        ? 'நாங்கள் நாமக்கல், சேலம் மற்றும் ஈரோடு மாவட்டங்களில் விவசாயிகளுக்கு சேவை செய்கிறோம். எங்கள் அனுபவம் வாய்ந்த பைலட்கள் தினமும் 50+ ஏக்கர் நிலங்களை மிகுந்த துல்லியத்துடன் கையாளுகின்றனர்.'
+                                        : 'We serve farmers in Namakkal, Salem, and Erode districts with professional agricultural drone services. Our experienced certified pilots handle over 50 acres daily with exceptional precision and care.'}
+                                </p>
+                                <p>
+                                    {lang === 'ta'
+                                        ? 'பயிர் ஆரோக்கிய கண்காணிப்பு மூலம் நோய்கள் மற்றும் பூச்சி தாக்குதல்களை முன்கூட்டியே கண்டறிந்து, சரியான நேரத்தில் தீர்வுகளை வழங்குகிறோம். இது உங்கள் அறுவடையை பாதுகாக்கும் அதே வேளையில், உரம் மற்றும் பூச்சிக்கொல்லி செலவுகளை குறைக்கிறது.'
+                                        : 'Through crop health monitoring using multispectral imaging, we detect diseases and pest infestations early, providing timely solutions to protect your harvest. This proactive approach reduces fertilizer and pesticide costs while maximizing crop yields.'}
                                 </p>
                             </div>
                             

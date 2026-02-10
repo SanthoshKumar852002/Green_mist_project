@@ -65,12 +65,12 @@ const Home = ({ lang, onSelectLang }) => {
     const seoConfig = {
         en: {
             title: "Green Mist - #1 Agricultural Drone Services in Tamil Nadu | Precision Farming",
-            description: "Transform your farming with Green Mist's professional drone services. Crop spraying, health monitoring, pest control & field mapping. 50+ acres/day coverage. Call: 78999 78869",
+            description: "Professional agricultural drone services in Tamil Nadu. Crop spraying, monitoring & precision farming. Call: 78999 78869",
             keywords: "agricultural drone services Tamil Nadu, drone spraying near me, precision farming India, crop monitoring drones, pest control drone services, farm drone spraying, smart agriculture Tamil Nadu, drone agriculture services Chennai, drone spraying cost per acre, agricultural drone price"
         },
         ta: {
             title: "கிரீன் மிஸ்ட் - தமிழ்நாட்டில் #1 வேளாண் ட்ரோன் சேவைகள் | துல்லிய விவசாயம்",
-            description: "கிரீன் மிஸ்ட்டின் தொழில்முறை ட்ரோன் சேவைகளுடன் உங்கள் விவசாயத்தை மாற்றுங்கள். பயிர் தெளிப்பு, ஆரோக்கிய கண்காணிப்பு, பூச்சி கட்டுப்பாடு. அழைக்கவும்: 78999 78869",
+            description: "தமிழ்நாட்டில் தொழில்முறை வேளாண் ட்ரோன் சேவைகள். பயிர் தெளிப்பு, கண்காணிப்பு & துல்லிய விவசாயம். அழைக்கவும்: 78999 78869",
             keywords: "வேளாண் ட்ரோன் சேவைகள் தமிழ்நாடு, ட்ரோன் தெளிப்பு, துல்லிய விவசாயம், பயிர் கண்காணிப்பு, பூச்சி கட்டுப்பாடு ட்ரோன்"
         }
     };

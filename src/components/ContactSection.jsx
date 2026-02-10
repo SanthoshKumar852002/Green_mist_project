@@ -307,7 +307,7 @@ const ContactSection = ({ lang }) => {
               >
                 <div className="bg-gradient-to-br from-primary-50/80 to-emerald-50/80 border border-primary-100 p-6 sm:p-8 md:p-12 rounded-[2rem] sm:rounded-[2.5rem] h-full shadow-lg">
 
-                  <h2
+                  <h3
                     className="text-xl sm:text-2xl md:text-3xl font-black mb-6 sm:mb-8 text-primary-900 tracking-tight flex items-center gap-3"
                     style={{
                       fontFamily: "'Montserrat', sans-serif",
@@ -321,7 +321,7 @@ const ContactSection = ({ lang }) => {
                     >
                       💡
                     </motion.span>
-                  </h2>
+                  </h3>
 
                   <div className="space-y-3 sm:space-y-4" role="list">
                     {faqs.map((faq, i) => (

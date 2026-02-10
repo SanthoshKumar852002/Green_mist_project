@@ -111,7 +111,7 @@ const ROICalculator = ({ lang }) => {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
                     >
-                        <h2
+                        <h3
                             className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-3 sm:mb-4 md:mb-6 leading-tight"
                             style={{
                                 fontFamily: "'Montserrat', sans-serif",
@@ -119,7 +119,7 @@ const ROICalculator = ({ lang }) => {
                             }}
                         >
                             Calculate Your Savings
-                        </h2>
+                        </h3>
                         <p className="text-primary-100 text-sm sm:text-base mb-6 sm:mb-8 md:mb-10 opacity-90 leading-relaxed">
                             {t('calcDesc')}
                         </p>

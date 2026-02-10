@@ -78,9 +78,9 @@ const ScrollVideo = ({ src, title, subtitle }) => {
                             style={{ y: yText }}
                             className="max-w-2xl"
                         >
-                            <h2 className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-black text-white mb-1 sm:mb-2 md:mb-3 lg:mb-4 uppercase tracking-tighter leading-tight">
+                            <h3 className="text-sm sm:text-base md:text-xl lg:text-2xl xl:text-3xl font-black text-white mb-1 sm:mb-2 md:mb-3 lg:mb-4 uppercase tracking-tighter leading-tight">
                                 <TypewriterText text={title || "Witness The Future"} />
-                            </h2>
+                            </h3>
                             <motion.p
                                 initial={{ opacity: 0 }}
                                 whileInView={{ opacity: 1 }}
