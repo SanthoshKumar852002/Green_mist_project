@@ -1,16 +1,57 @@
+<IfModule mod_headers.c>
+  # Prevent MIME type sniffing
+  Header set X-Content-Type-Options "nosniff"
+
+# Clickjacking protection
+
+Header set X-Frame-Options "SAMEORIGIN"
+
+# Referrer policy
+
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+# Content Security Policy - adjust sources as needed for third-party services
+
+Header set Content-Security-Policy "default-src 'self' https: data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://api.web3forms.com; frame-ancestors 'self';"
+
+# HSTS (only enable if site is fully HTTPS)
+
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+# Other security-related headers
+
+Header set X-DNS-Prefetch-Control "on"
+Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# Caching for assets
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+</IfModule>
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # 1. Serve existing files (like sitemap.xml, robots.txt, images) directly
-  # Fixed: Use [OR] to check if file OR directory exists
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
+# 1. Serve existing files (like sitemap.xml, robots.txt, images) directly
 
-  # 2. Redirect everything else to index.html for SPA
-  # This fixes 404 errors on refresh
-  RewriteRule ^ index.html [L]
+# Fixed: Use [OR] to check if file OR directory exists
+
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# 2. Redirect everything else to index.html for SPA
+
+# This fixes 404 errors on refresh
+
+RewriteRule ^ index.html [L]
 </IfModule>
 </CodeContent>
 <parameter name="Complexity">3
