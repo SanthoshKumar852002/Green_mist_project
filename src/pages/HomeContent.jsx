@@ -148,14 +148,14 @@ const HomeContent = ({ lang, t }) => {
                                     <div className="relative w-full max-w-md">
                                             {/* subtle blurred duplicate behind for soft shadow/opacity effect */}
                                             <img
-                                                src="/images/about%20image.png"
+                                                src="/images/about image.png"
                                                 alt="about image blurred"
                                                 className="absolute inset-0 w-full h-full rounded-2xl object-cover filter blur-xl opacity-30 transform translate-y-4 scale-105 transition-all duration-500"
                                                 style={{ pointerEvents: 'none' }}
                                             />
 
                                             <img
-                                                src="/images/about%20image.png"
+                                                src="/images/about image.png"
                                                 alt="about image"
                                                 loading="lazy"
                                                 decoding="async"
@@ -448,7 +448,7 @@ const HomeContent = ({ lang, t }) => {
                         >
                             <motion.img
                                 style={{ y: imgY }}
-                                src="/images/hero slider 1 new.png"
+                                src="/images/hero_slider_1_new.png"
                                 className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 aspect-square md:aspect-auto object-cover"
                                 alt="DroneTech"
                                 loading="lazy"

@@ -1,7 +1,7 @@
 // ================= LOCAL BUSINESS SCHEMA =================
 export const getLocalBusinessSchema = (lang = "en") => ({
   "@context": "https://schema.org",
-  "@type": "AgriculturalService",
+  "@type": "LocalBusiness",
   "@id": "https://greenmist.net/#localbusiness",
   "name": "GREENMIST Agriculture Drone",
   "alternateName": lang === "ta"
@@ -78,7 +78,7 @@ export const getServiceSchema = () => ({
   "name": "Agricultural Drone Services",
   "serviceType": "Precision Agriculture Drone Services",
   "provider": {
-    "@type": "AgriculturalService",
+    "@type": "LocalBusiness",
     "@id": "https://greenmist.net/#localbusiness"
   },
   "areaServed": {
