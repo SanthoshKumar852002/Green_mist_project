@@ -131,6 +131,16 @@ const HomeContent = ({ lang, t }) => {
                                             ? 'எங்கள் டிஜிசிஏ சான்றளிக்கப்பட்ட பைலட்கள் மற்றும் நவீன ட்ரோன்கள் மூலம், விவசாயிகள் 50+ ஏக்கர் நிலங்களை தினமும் பாதுகாப்பாகவும், குறைந்த செலவில் கையாள முடிகிறது.'
                                             : 'With DGCA-certified pilots and state-of-the-art drones, our team covers over 50 acres per day, helping farmers save costs, water, and time while protecting the environment.'}
                                     </p>
+                                    <p className="mb-3 text-base sm:text-lg leading-relaxed">
+                                        {lang === 'ta'
+                                            ? 'பாரம்பரிய முறைகளை விட ட்ரோன் தொழில்நுட்பம் மிகவும் சிறந்தது. இது பயிர்களுக்கு சமமான மருந்து தெளிப்பை உறுதி செய்கிறது, மனித உடல்நலத்திற்கு தீங்கு விளைவிப்பதில்லை, மற்றும் மண்ணின் வளத்தை பாதுகாக்கிறது.'
+                                            : 'Drone technology offers superior efficiency compared to traditional manual spraying. It ensures uniform application of fertilizers and pesticides, reduces health risks for farmers by minimizing direct exposure to chemicals, and preserves soil health by preventing excessive chemical runoff.'}
+                                    </p>
+                                    <p className="mb-3 text-base sm:text-lg leading-relaxed">
+                                        {lang === 'ta'
+                                            ? 'நாங்கள் திருச்செங்கோடு, நாமக்கல், ஈரோடு, சேலம் மற்றும் கரூர் உள்ளிட்ட பகுதிகளில் விவசாயிகளுக்கு சேவை செய்கிறோம். எங்கள் நோக்கம் விவசாயத்தை லாபகரமாகவும், நிலையானதாகவும் மாற்றுவதாகும்.'
+                                            : 'We proudly serve farmers across Tiruchengode, Namakkal, Erode, Salem, and Karur. Our mission is to make agriculture more profitable and sustainable through innovative technology solutions tailored for the modern farmer.'}
+                                    </p>
                                     <ul className="list-disc pl-6 mb-3 text-base sm:text-lg">
                                         <li>{lang === 'ta' ? '90% குறைவான நீர் பயன்பாடு' : '90% less water usage than traditional methods'}</li>
                                         <li>{lang === 'ta' ? '30% செலவு சேமிப்பு' : '30% cost savings for farmers'}</li>
@@ -448,7 +458,7 @@ const HomeContent = ({ lang, t }) => {
                         >
                             <motion.img
                                 style={{ y: imgY }}
-                                src="/images/hero_slider_1_new.png"
+                                src="/images/hero slider 1 new.png"
                                 className="w-full h-full grayscale hover:grayscale-0 transition-all duration-700 aspect-square md:aspect-auto object-cover"
                                 alt="DroneTech"
                                 loading="lazy"

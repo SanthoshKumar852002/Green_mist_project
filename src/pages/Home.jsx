@@ -196,10 +196,11 @@ const Home = ({ lang, onSelectLang }) => {
                 {/* Hidden SEO Content for Crawlers */}
                 <div className="hidden" aria-hidden="true">
                     <h1>Green Mist - Agricultural Drone Services Tamil Nadu</h1>
-                    <p>Professional drone spraying services for crops, pest control, and precision farming in Namakkal, Salem, and Erode districts.</p>
-                    <p>Services: Crop Spraying, Pest Control, Water Monitoring, Field Mapping, Crop Health Assessment</p>
-                    <p>Contact: 78999 78869, 91503 95864, 90039 92693</p>
-                    <p>Service Areas: Namakkal, Salem, Erode</p>
+                    <p>Professional agricultural drone services in Tamil Nadu offering precision crop spraying, health monitoring, and land surveying. We help farmers in Namakkal, Salem, Erode, and Tiruchengode increase crop yields and reduce costs.</p>
+                    <p>Our services include automated pesticide spraying, fertilizer application, multispectral crop health assessment, and water management solutions. We use advanced DGCA-certified drones for efficient and safe farming.</p>
+                    <p>Services: Crop Spraying, Pest Control, Water Monitoring, Field Mapping, Crop Health Assessment, Seed Sowing.</p>
+                    <p>Contact Green Mist at +91 78999 78869, +91 91503 95864, or +91 90039 92693 for a consultation.</p>
+                    <p>Service Areas: Namakkal, Salem, Erode, Tiruchengode, Karur, and surrounding regions in Tamil Nadu.</p>
                 </div>
             </div>
         </>
